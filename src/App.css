@@ -1,0 +1,59 @@
+.app-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.splash-transition {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  transition: opacity 500ms ease-in-out;
+}
+
+.splash-transition.fade-in {
+  opacity: 1;
+}
+
+.splash-transition.fade-out {
+  opacity: 0;
+}
+
+.main-content-transition {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  transition: opacity 500ms ease-in-out;
+  opacity: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.main-content-transition.fade-in {
+  opacity: 1;
+}
+
+.app-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+}
+
+.welcome-text {
+  font-size: 24px;
+  font-family: 'Prompt', sans-serif;
+  color: #333;
+}
+
+
+

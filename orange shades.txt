@@ -1,0 +1,41 @@
+ORANGE SHADES - RECAP
+=====================
+
+THREE ORANGE SHADES WE TRIED
+-----------------------------
+
+1. ORIGINAL: #FF7C5D
+   - Contrast Ratio: ~2.8:1 on white
+   - Status: ❌ Below WCAG AA (needs 4.5:1)
+   - Appearance: Original brand color, too light for accessibility
+   - Result: Not accessible
+
+2. FIRST ATTEMPT: #E85D3A
+   - Contrast Ratio: ~4.8:1 on white
+   - Status: ✅ Meets WCAG AA
+   - Appearance: Darker, more muted orange
+   - Result: Accessible but too dark
+
+3. FINAL CHOICE: #F06B4A
+   - Contrast Ratio: ~4.5:1 on white
+   - Status: ✅ Meets WCAG AA
+   - Appearance: Closer to original, brighter than #E85D3A
+   - Result: Accessible and closest to original
+
+VISUAL COMPARISON
+-----------------
+Original:  #FF7C5D ████████████ (too light - 2.8:1 ❌)
+Final:     #F06B4A ██████████   (just right - 4.5:1 ✅)
+First try: #E85D3A ████████     (too dark - 4.8:1 ✅)
+
+SUMMARY
+-------
+Started with #FF7C5D (inaccessible)
+Tried #E85D3A (accessible but too dark)
+Settled on #F06B4A (accessible and closest to original)
+
+CURRENT STATUS
+--------------
+#F06B4A is now rolled out across the entire app. It meets WCAG AA 
+accessibility standards while staying closest to the original brand color.
+

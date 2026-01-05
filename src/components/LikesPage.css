@@ -1,0 +1,485 @@
+:root {
+  --color-primary: #F06B4A;
+  --color-background: #fff;
+  --color-background-light: #F9F7F5;
+  --color-border: #F3EEEB;
+  --color-text-primary: #333;
+  --color-text-secondary: #666;
+  --color-text-tertiary: #999;
+  --font-primary: 'Prompt', sans-serif;
+  --font-secondary: 'Open Sans', sans-serif;
+}
+
+.likes-page {
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--color-background);
+  padding-bottom: 100px;
+}
+
+.likes-header {
+  padding: 20px 20px 24px 20px;
+  border-bottom: 1px solid var(--color-border);
+  background-color: var(--color-background);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.likes-title {
+  font-family: var(--font-primary);
+  font-weight: 900;
+  font-size: 36px;
+  color: var(--color-primary);
+  margin: 0 0 4px 0;
+}
+
+.likes-subtitle {
+  font-family: var(--font-secondary);
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.likes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  padding: 20px;
+}
+
+.like-card {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  background-color: var(--color-border);
+}
+
+.like-card:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.like-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(240, 107, 74, 0.2);
+}
+
+.like-card:active {
+  transform: translateY(-2px);
+}
+
+.like-card-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.like-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.like-card:hover .like-card-image {
+  transform: scale(1.05);
+}
+
+.like-card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%);
+  padding: 20px 16px 16px 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.like-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.like-card-name {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: 24px;
+  color: var(--color-background);
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.like-card-details {
+  font-family: var(--font-secondary);
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  line-height: 1.4;
+}
+
+.like-card-date {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 4px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Profile Detail View */
+.profile-detail-header {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--color-border);
+  background-color: var(--color-background);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  gap: 5px;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s;
+  flex-shrink: 0;
+}
+
+.back-button:hover {
+  opacity: 0.7;
+}
+
+.back-button:active {
+  opacity: 0.5;
+}
+
+.back-button:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.back-button svg {
+  width: 24px;
+  height: 24px;
+}
+
+.profile-detail-title {
+  font-family: var(--font-primary);
+  font-weight: 900;
+  font-size: 28px;
+  color: var(--color-primary);
+  margin: 0;
+}
+
+.profile-detail-content {
+  width: 100%;
+  padding-bottom: 65px;
+  background-color: var(--color-background);
+}
+
+/* Image Carousel (reused from ProfilePage) */
+.carousel-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: visible;
+}
+
+.image-carousel {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  cursor: grab;
+  user-select: none;
+  background-color: #fff;
+  z-index: 1;
+}
+
+.image-carousel:active {
+  cursor: grabbing;
+}
+
+.image-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  object-fit: contain;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  background-color: #fff;
+}
+
+.carousel-indicators {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 12px;
+  background-color: var(--color-border);
+  border-radius: 20px 0 0 20px;
+  z-index: 10;
+}
+
+.indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border: none;
+  padding: 0;
+}
+
+.indicator:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.indicator.active {
+  background-color: var(--color-primary);
+}
+
+/* Like/Dislike Buttons */
+.action-buttons {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  display: flex;
+  gap: 12px;
+  z-index: 5;
+  pointer-events: auto;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.action-button {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.2s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  visibility: visible;
+  opacity: 1;
+}
+
+.action-button:hover {
+  transform: scale(1.1);
+  opacity: 0.9;
+}
+
+.action-button:active {
+  transform: scale(0.95);
+}
+
+.action-button:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.button-icon {
+  color: #FFFFFF;
+  font-size: 36px;
+  font-weight: bold;
+  line-height: 1;
+  user-select: none;
+  display: block;
+}
+
+.dislike-button .button-icon {
+  font-size: 40px;
+  color: #FFFFFF;
+  font-weight: bold;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.like-button .heart-icon {
+  width: 31px;
+  height: 31px;
+  display: block;
+}
+
+.like-button .button-icon.heart-icon {
+  width: 31px;
+  height: 31px;
+  display: block;
+}
+
+.like-button .heart-icon path,
+.like-button .button-icon.heart-icon path {
+  fill: #FFFFFF;
+}
+
+/* Profile Content (reused from ProfilePage) */
+.profile-content {
+  padding: 24px 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.profile-name {
+  font-family: var(--font-primary);
+  font-weight: 900;
+  font-size: 50px;
+  color: var(--color-primary);
+  margin: 0 0 16px 0;
+  line-height: 1.2;
+}
+
+/* Swipeable Details Row */
+.details-row {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  margin-bottom: 12px;
+  cursor: grab;
+  user-select: none;
+}
+
+.details-row:active {
+  cursor: grabbing;
+}
+
+.details-row::-webkit-scrollbar {
+  display: none;
+}
+
+.details-row .detail-item {
+  font-family: var(--font-secondary);
+  font-weight: 300;
+  font-size: 16px;
+  color: var(--color-primary);
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  white-space: nowrap;
+  min-width: 100%;
+  padding-right: 20px;
+}
+
+/* Profile Sections */
+.profile-section {
+  margin-bottom: 20px;
+}
+
+.conversation-starter-section {
+  margin-top: 5px;
+  margin-bottom: 25px;
+}
+
+.section-label {
+  font-family: var(--font-primary);
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--color-primary);
+  margin: 0 0 4px 0;
+}
+
+.section-body {
+  font-family: var(--font-secondary);
+  font-size: 18px;
+  color: var(--color-primary);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.section-body.looking-for-body {
+  font-size: 16px;
+  font-weight: 300;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .likes-title {
+    font-size: 32px;
+  }
+  
+  .likes-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding: 16px;
+  }
+  
+  .like-card-name {
+    font-size: 22px;
+  }
+  
+  .like-card-details {
+    font-size: 12px;
+  }
+
+  .profile-detail-title {
+    font-size: 24px;
+  }
+
+  .profile-name {
+    font-size: 42px;
+  }
+  
+  .image-carousel {
+    aspect-ratio: 4 / 3;
+  }
+  
+  .profile-content {
+    padding: 20px 16px;
+  }
+  
+  .carousel-wrapper {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+@media (max-width: 480px) {
+  .likes-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .like-card {
+    aspect-ratio: 4 / 5;
+  }
+}
