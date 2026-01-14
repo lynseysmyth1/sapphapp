@@ -43,6 +43,13 @@ export default function ProfilePage() {
       className="profiles-swiper"
       slidesPerView={1}
       spaceBetween={0}
+      allowTouchMove={true}
+      preventClicks={true}
+      preventClicksPropagation={true}
+      touchStartPreventDefault={true}
+      touchMoveStopPropagation={false}
+      resistance={true}
+      resistanceRatio={0.85}
       onSwiper={(swiper) => {
         profilesSwiperRef.current = swiper;
       }}
@@ -65,6 +72,13 @@ export default function ProfilePage() {
                 modules={[Pagination]}
                 pagination={{ clickable: true }}
                 className="image-swiper"
+                allowTouchMove={true}
+                preventClicks={true}
+                preventClicksPropagation={true}
+                touchStartPreventDefault={true}
+                touchMoveStopPropagation={false}
+                resistance={true}
+                resistanceRatio={0.85}
                 initialSlide={profileImageIndex}
                 onSlideChange={(swiper) => {
                   const nextIndex = swiper.activeIndex;
