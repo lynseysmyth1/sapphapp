@@ -1,13 +1,12 @@
 {
   "name": "sapph-dating-app",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "version:increment": "node scripts/increment-version.js",
-    "precommit": "npm run version:increment"
+    "version:increment": "node scripts/increment-version.js"
   },
   "dependencies": {
     "react": "^18.2.0",

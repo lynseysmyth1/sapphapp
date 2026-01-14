@@ -3,8 +3,8 @@ import './SplashScreen.css';
 import backgroundImage from '../../uploaded_images/image1.jpg';
 import logoImage from '../../uploaded_images/logo.png';
 
-const APP_VERSION = '1.0.3';
-const LAST_CHANGE = 'Revert to original carousel implement...';
+const APP_VERSION = '1.0.5';
+const LAST_CHANGE = 'Fix version increment script and setu...';
 
 export default function SplashScreen({ onSignIn }) {
   const [backgroundLoaded, setBackgroundLoaded] = useState(false);
