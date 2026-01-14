@@ -15,6 +15,10 @@ export default function ProfilePage() {
   const profilesSwiperRef = useRef(null);
 
   // Safety check to prevent crashes
+  if (!profiles || profiles.length === 0) {
+    return <div>No profiles available</div>;
+  }
+
   const currentProfile = profiles[currentProfileIndex] || profiles[0];
   const details = currentProfile?.details || [];
 
@@ -46,33 +50,38 @@ export default function ProfilePage() {
     }
   };
 
-  return (
-    <Swiper
-      direction="horizontal"
-      className="profiles-swiper"
-      slidesPerView={1}
-      spaceBetween={0}
-      allowTouchMove={true}
-      preventClicks={false}
-      preventClicksPropagation={false}
-      touchStartPreventDefault={false}
-      touchMoveStopPropagation={true}
-      resistance={true}
-      resistanceRatio={0.85}
-      watchOverflow={true}
-      onSwiper={(swiper) => {
-        profilesSwiperRef.current = swiper;
-      }}
-      onSlideChange={(swiper) => {
-        const newIndex = Math.max(0, Math.min(swiper.activeIndex, profiles.length - 1));
-        setCurrentProfileIndex(newIndex);
-      }}
-      onTouchStart={(swiper, event) => {
-        // Prevent conflicts with nested Swiper
-        event.stopPropagation();
-      }}
-      initialSlide={currentProfileIndex}
-    >
+  try {
+    return (
+      <Swiper
+        direction="horizontal"
+        className="profiles-swiper"
+        slidesPerView={1}
+        spaceBetween={0}
+        allowTouchMove={true}
+        preventClicks={false}
+        preventClicksPropagation={false}
+        touchStartPreventDefault={false}
+        touchMoveStopPropagation={true}
+        resistance={true}
+        resistanceRatio={0.85}
+        watchOverflow={true}
+        onSwiper={(swiper) => {
+          try {
+            profilesSwiperRef.current = swiper;
+          } catch (error) {
+            console.error('Error setting swiper ref:', error);
+          }
+        }}
+        onSlideChange={(swiper) => {
+          try {
+            const newIndex = Math.max(0, Math.min(swiper.activeIndex, profiles.length - 1));
+            setCurrentProfileIndex(newIndex);
+          } catch (error) {
+            console.error('Error in onSlideChange:', error);
+          }
+        }}
+        initialSlide={currentProfileIndex}
+      >
       {profiles.map((profile, profileIndex) => {
         const isCurrentProfile = profileIndex === currentProfileIndex;
         const profileImageIndex = profileImageIndices[profileIndex] || 0;
@@ -95,7 +104,6 @@ export default function ProfilePage() {
                 resistance={true}
                 resistanceRatio={0.85}
                 watchOverflow={true}
-                nested={true}
                 initialSlide={profileImageIndex}
                 onSlideChange={(swiper) => {
                   const nextIndex = swiper.activeIndex;
@@ -103,10 +111,6 @@ export default function ProfilePage() {
                     ...prev,
                     [profileIndex]: nextIndex
                   }));
-                }}
-                onTouchStart={(swiper, event) => {
-                  // Stop propagation to parent Swiper
-                  event.stopPropagation();
                 }}
               >
                 {profile.images.map((image, index) => (
@@ -188,6 +192,10 @@ export default function ProfilePage() {
           </SwiperSlide>
         );
       })}
-    </Swiper>
-  );
+      </Swiper>
+    );
+  } catch (error) {
+    console.error('Error rendering ProfilePage:', error);
+    return <div>Error loading profiles. Please refresh the page.</div>;
+  }
 }
