@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "version:increment": "node scripts/increment-version.js",
+    "precommit": "npm run version:increment"
   },
   "dependencies": {
     "react": "^18.2.0",
