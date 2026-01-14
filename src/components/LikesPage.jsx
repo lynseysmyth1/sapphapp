@@ -37,12 +37,19 @@ export default function LikesPage() {
 
   // Update carousel position when index changes
   useEffect(() => {
-    if (carouselSwipe.containerRef.current && selectedProfile) {
-      carouselSwipe.containerRef.current.scrollTo({
-        top: currentImageIndex * carouselSwipe.containerRef.current.offsetHeight,
-        behavior: 'smooth'
-      });
-    }
+    const timer = setTimeout(() => {
+      if (carouselSwipe.containerRef.current && selectedProfile) {
+        const carousel = carouselSwipe.containerRef.current;
+        const imageHeight = carousel.offsetHeight;
+        if (imageHeight > 0) {
+          carousel.scrollTo({
+            top: currentImageIndex * imageHeight,
+            behavior: 'smooth'
+          });
+        }
+      }
+    }, 100);
+    return () => clearTimeout(timer);
   }, [currentImageIndex, selectedProfile, carouselSwipe.containerRef]);
 
   // Track carousel scroll to update indicators
@@ -121,6 +128,8 @@ export default function LikesPage() {
                   src={image}
                   alt={`${selectedProfile.name} ${index + 1}`}
                   className="carousel-image"
+                  loading={index === 0 ? "eager" : "lazy"}
+                  decoding="async"
                 />
               ))}
             </div>

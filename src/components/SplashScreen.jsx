@@ -3,8 +3,8 @@ import './SplashScreen.css';
 import backgroundImage from '../../uploaded_images/image1.jpg';
 import logoImage from '../../uploaded_images/logo.png';
 
-const APP_VERSION = '1.0.9';
-const LAST_CHANGE = 'Update button positioning and profile...';
+const APP_VERSION = '1.0.11';
+const LAST_CHANGE = 'Reduce spacing and ensure buttons are...';
 
 export default function SplashScreen({ onSignIn }) {
   const [backgroundLoaded, setBackgroundLoaded] = useState(false);

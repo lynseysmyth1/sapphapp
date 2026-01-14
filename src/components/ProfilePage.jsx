@@ -42,6 +42,13 @@ export default function ProfilePage() {
         behavior: 'smooth'
       });
     }
+    // Reset image index for new profile if not already set
+    if (!profileImageIndices[currentProfileIndex] && currentProfileIndex !== 0) {
+      setProfileImageIndices(prev => ({
+        ...prev,
+        [currentProfileIndex]: 0
+      }));
+    }
   }, [currentProfileIndex, profileSwipe.containerRef]);
 
   // Update carousel position when profile or image index changes
@@ -49,12 +56,16 @@ export default function ProfilePage() {
     const timer = setTimeout(() => {
       if (carouselSwipe.containerRef.current) {
         const imageIndex = profileImageIndices[currentProfileIndex] || 0;
-        carouselSwipe.containerRef.current.scrollTo({
-          top: imageIndex * carouselSwipe.containerRef.current.offsetHeight,
-          behavior: 'smooth'
-        });
+        const carousel = carouselSwipe.containerRef.current;
+        const imageHeight = carousel.offsetHeight;
+        if (imageHeight > 0) {
+          carousel.scrollTo({
+            top: imageIndex * imageHeight,
+            behavior: 'smooth'
+          });
+        }
       }
-    }, 0);
+    }, 100);
     return () => clearTimeout(timer);
   }, [profileImageIndices, currentProfileIndex, carouselSwipe.containerRef]);
 
@@ -132,6 +143,8 @@ export default function ProfilePage() {
                     src={image}
                     alt={`${profile.name} ${index + 1}`}
                     className="carousel-image"
+                    loading={index === 0 ? "eager" : "lazy"}
+                    decoding="async"
                   />
                 ))}
               </div>

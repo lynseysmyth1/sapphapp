@@ -97,6 +97,8 @@
   flex-shrink: 0;
   scroll-snap-align: start;
   background-color: var(--color-background);
+  display: block;
+  max-width: 100%;
 }
 
 .carousel-indicators {
@@ -341,10 +343,22 @@
     font-size: 50px;
   }
   
-  .image-carousel {
+  .carousel-wrapper {
     height: 60vh;
+    min-height: 60vh;
+  }
+  
+  .image-carousel {
+    height: 100%;
     touch-action: pan-y;
     overscroll-behavior-y: contain;
+  }
+  
+  .carousel-image {
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    display: block;
   }
   
   .profile-content {
