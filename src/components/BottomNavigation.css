@@ -87,3 +87,32 @@
   padding-bottom: 65px;
 }
 
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .bottom-navigation {
+    padding: 4px 0;
+  }
+
+  .nav-item {
+    padding: 4px 12px;
+  }
+
+  .nav-icon {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 1px;
+  }
+
+  .nav-icon.heart-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .nav-label {
+    font-size: 11px;
+  }
+
+  .profile-page {
+    padding-bottom: 55px;
+  }
+}

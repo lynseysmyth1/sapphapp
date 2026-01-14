@@ -138,7 +138,7 @@
 /* Like/Dislike Buttons */
 .action-buttons {
   position: absolute;
-  bottom: 16px;
+  bottom: -25px;
   right: 16px;
   display: flex;
   gap: 12px;
@@ -179,7 +179,7 @@
 }
 
 .action-button.dislike-button {
-  background-color: var(--color-background);
+  background-color: var(--color-primary);
 }
 
 .button-icon {
@@ -193,7 +193,7 @@
 
 .action-button.dislike-button .button-icon {
   font-size: 40px;
-  color: var(--color-primary) !important;
+  color: var(--color-background) !important;
   font-weight: bold;
   line-height: 1;
   display: flex;
@@ -337,7 +337,7 @@
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .profile-name {
-    font-size: 42px;
+    font-size: 50px;
   }
   
   .image-carousel {
@@ -351,7 +351,7 @@
   }
 
   .action-buttons {
-    bottom: 16px;
+    bottom: -25px;
     right: 16px;
     z-index: 200;
   }
