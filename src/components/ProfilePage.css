@@ -57,6 +57,7 @@
   overflow: visible;
   background-color: var(--color-background);
   z-index: 1;
+  margin-bottom: 30px;
 }
 
 /* Image Carousel */
@@ -148,6 +149,8 @@
   pointer-events: auto;
   visibility: visible !important;
   opacity: 1 !important;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 }
 
 .action-button {
@@ -346,6 +349,7 @@
   .carousel-wrapper {
     height: 60vh;
     min-height: 60vh;
+    margin-bottom: 30px;
   }
   
   .image-carousel {
@@ -370,6 +374,14 @@
     bottom: -25px;
     right: 16px;
     z-index: 200;
+    position: absolute;
+    display: flex;
+    gap: 12px;
+    pointer-events: auto;
+    visibility: visible !important;
+    opacity: 1 !important;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
   }
 
   .action-button {

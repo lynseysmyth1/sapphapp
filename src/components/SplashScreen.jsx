@@ -3,8 +3,8 @@ import './SplashScreen.css';
 import backgroundImage from '../../uploaded_images/image1.jpg';
 import logoImage from '../../uploaded_images/logo.png';
 
-const APP_VERSION = '1.0.15';
-const LAST_CHANGE = 'Move profile name down by 15px';
+const APP_VERSION = '1.0.17';
+const LAST_CHANGE = 'Move profile name down by additional 3px';
 
 export default function SplashScreen({ onSignIn }) {
   const [backgroundLoaded, setBackgroundLoaded] = useState(false);
