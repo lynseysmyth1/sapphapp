@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import './ProfilePage.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
@@ -12,72 +12,52 @@ export default function ProfilePage() {
   const [currentProfileIndex, setCurrentProfileIndex] = useState(0);
   const [profileImageIndices, setProfileImageIndices] = useState({});
   const [currentDetailIndex, setCurrentDetailIndex] = useState(0);
+  const profilesSwiperRef = useRef(null);
 
   const currentProfile = profiles[currentProfileIndex];
-  const images = currentProfile.images;
   const details = currentProfile.details;
-  const currentImageIndex = profileImageIndices[currentProfileIndex] || 0;
 
-  // Profile swipe handlers
-  const profileSwipe = useHorizontalSwipe((newIndex) => {
-    const clampedIndex = Math.max(0, Math.min(newIndex, profiles.length - 1));
-    setCurrentProfileIndex(clampedIndex);
-  });
-
-  // Carousel swipe handlers
   // Details swipe handlers
   const detailSwipe = useHorizontalSwipe((newIndex) => {
     setCurrentDetailIndex(Math.max(0, Math.min(newIndex, details.length - 1)));
   });
 
-  // Update profile position when index changes
-  useEffect(() => {
-    if (profileSwipe.containerRef.current) {
-      profileSwipe.containerRef.current.scrollTo({
-        left: currentProfileIndex * profileSwipe.containerRef.current.offsetWidth,
-        behavior: 'smooth'
-      });
-    }
-  }, [currentProfileIndex, profileSwipe.containerRef]);
-
-  // Update details position when index changes
-  useEffect(() => {
-    if (detailSwipe.containerRef.current) {
-      const itemWidth = detailSwipe.containerRef.current.scrollWidth / details.length;
-      detailSwipe.containerRef.current.scrollTo({
-        left: currentDetailIndex * itemWidth,
-        behavior: 'smooth'
-      });
-    }
-  }, [currentDetailIndex, details.length, detailSwipe.containerRef]);
-
   // Like/Dislike handlers
   const handleLike = () => {
     console.log(`Profile ${currentProfile.name} liked`);
-    if (currentProfileIndex < profiles.length - 1) {
-      setCurrentProfileIndex(currentProfileIndex + 1);
+    if (profilesSwiperRef.current && currentProfileIndex < profiles.length - 1) {
+      profilesSwiperRef.current.slideNext();
     }
   };
 
   const handleDislike = () => {
     console.log(`Profile ${currentProfile.name} disliked`);
-    if (currentProfileIndex < profiles.length - 1) {
-      setCurrentProfileIndex(currentProfileIndex + 1);
+    if (profilesSwiperRef.current && currentProfileIndex < profiles.length - 1) {
+      profilesSwiperRef.current.slideNext();
     }
   };
 
   return (
-    <div 
-      className="profiles-container"
-      ref={profileSwipe.containerRef}
-      {...profileSwipe.handlers}
+    <Swiper
+      direction="horizontal"
+      className="profiles-swiper"
+      slidesPerView={1}
+      spaceBetween={0}
+      onSwiper={(swiper) => {
+        profilesSwiperRef.current = swiper;
+      }}
+      onSlideChange={(swiper) => {
+        setCurrentProfileIndex(swiper.activeIndex);
+      }}
+      initialSlide={currentProfileIndex}
     >
       {profiles.map((profile, profileIndex) => {
         const isCurrentProfile = profileIndex === currentProfileIndex;
         const profileImageIndex = profileImageIndices[profileIndex] || 0;
         
         return (
-          <div key={profileIndex} className="profile-page">
+          <SwiperSlide key={profileIndex} className="profile-slide">
+            <div className="profile-page">
             {/* Image Carousel */}
             <div className="carousel-wrapper">
               <Swiper
@@ -169,9 +149,10 @@ export default function ProfilePage() {
                 </div>
               </div>
             </div>
-          </div>
+            </div>
+          </SwiperSlide>
         );
       })}
-    </div>
+    </Swiper>
   );
 }
