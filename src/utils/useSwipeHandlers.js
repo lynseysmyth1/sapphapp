@@ -92,11 +92,11 @@ export const useVerticalSwipe = (onSwipeEnd, sensitivity = 2) => {
   };
 
   const handleTouchMove = (e) => {
+    // Allow native scrolling on mobile - don't prevent default
+    // Native scrolling works better for vertical carousels on touch devices
+    // The scroll event listener in the component will handle updating the index
     if (!containerRef.current) return;
-    e.preventDefault();
-    const y = e.touches[0].pageY - containerRef.current.offsetTop;
-    const walk = (y - startYRef.current) * sensitivity;
-    containerRef.current.scrollTop = scrollTopRef.current - walk;
+    // Don't interfere with native scrolling
   };
 
   const handleTouchEnd = () => {
