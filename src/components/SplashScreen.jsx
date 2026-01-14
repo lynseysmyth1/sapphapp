@@ -3,8 +3,8 @@ import './SplashScreen.css';
 import backgroundImage from '../../uploaded_images/image1.jpg';
 import logoImage from '../../uploaded_images/logo.png';
 
-const APP_VERSION = '1.0.29';
-const LAST_CHANGE = 'Update version to 1.0.26';
+const APP_VERSION = '1.0.31';
+const LAST_CHANGE = 'Update version to 1.0.28';
 
 export default function SplashScreen({ onSignIn }) {
   const [backgroundLoaded, setBackgroundLoaded] = useState(false);
