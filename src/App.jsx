@@ -5,6 +5,7 @@ import ProfilePage from './components/ProfilePage';
 import ChatPage from './components/ChatPage';
 import LikesPage from './components/LikesPage';
 import BottomNavigation from './components/BottomNavigation';
+import ErrorBoundary from './components/ErrorBoundary';
 import './App.css';
 
 function App() {
@@ -60,9 +61,11 @@ function App() {
       <div 
         className={`main-content-transition ${(!showSplash || isTransitioning) ? 'fade-in' : ''}`}
       >
-        {currentView === 'home' && <ProfilePage />}
-        {currentView === 'likes' && <LikesPage key={likesPageKey} />}
-        {currentView === 'chat' && <ChatPage />}
+        <ErrorBoundary>
+          {currentView === 'home' && <ProfilePage />}
+          {currentView === 'likes' && <LikesPage key={likesPageKey} />}
+          {currentView === 'chat' && <ChatPage />}
+        </ErrorBoundary>
         <BottomNavigation currentView={currentView} onNavigate={handleNavigate} />
       </div>
     </div>
