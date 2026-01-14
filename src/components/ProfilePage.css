@@ -225,7 +225,7 @@
   padding: 0px 20px 24px 20px;
   max-width: 600px;
   margin: 0 auto;
-  margin-top: -20px;
+  margin-top: -5px;
 }
 
 .profile-name {
@@ -363,7 +363,7 @@
   
   .profile-content {
     padding: 0px 16px 20px 16px;
-    margin-top: -20px;
+    margin-top: -5px;
   }
 
   .action-buttons {
