@@ -1,8 +1,12 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './ProfilePage.css';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
 import { profiles } from '../data/profiles';
 import { HeartIcon } from './shared/Icons';
-import { useHorizontalSwipe, useVerticalSwipe } from '../utils/useSwipeHandlers';
+import { useHorizontalSwipe } from '../utils/useSwipeHandlers';
 
 export default function ProfilePage() {
   const [currentProfileIndex, setCurrentProfileIndex] = useState(0);
@@ -21,14 +25,6 @@ export default function ProfilePage() {
   });
 
   // Carousel swipe handlers
-  const carouselSwipe = useVerticalSwipe((newIndex) => {
-    const clampedIndex = Math.max(0, Math.min(newIndex, images.length - 1));
-    setProfileImageIndices(prev => ({
-      ...prev,
-      [currentProfileIndex]: clampedIndex
-    }));
-  });
-
   // Details swipe handlers
   const detailSwipe = useHorizontalSwipe((newIndex) => {
     setCurrentDetailIndex(Math.max(0, Math.min(newIndex, details.length - 1)));
@@ -43,43 +39,6 @@ export default function ProfilePage() {
       });
     }
   }, [currentProfileIndex, profileSwipe.containerRef]);
-
-  // Update carousel position when profile or image index changes
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (carouselSwipe.containerRef.current) {
-        const imageIndex = profileImageIndices[currentProfileIndex] || 0;
-        carouselSwipe.containerRef.current.scrollTo({
-          top: imageIndex * carouselSwipe.containerRef.current.offsetHeight,
-          behavior: 'smooth'
-        });
-      }
-    }, 0);
-    return () => clearTimeout(timer);
-  }, [profileImageIndices, currentProfileIndex, carouselSwipe.containerRef]);
-
-  // Track carousel scroll to update indicators
-  useEffect(() => {
-    const carousel = carouselSwipe.containerRef.current;
-    if (!carousel) return;
-
-    const handleScroll = () => {
-      const scrollTop = carousel.scrollTop;
-      const imageHeight = carousel.offsetHeight;
-      const newIndex = Math.round(scrollTop / imageHeight);
-      const clampedIndex = Math.max(0, Math.min(newIndex, images.length - 1));
-      const currentIndexForProfile = profileImageIndices[currentProfileIndex] || 0;
-      if (clampedIndex !== currentIndexForProfile) {
-        setProfileImageIndices(prev => ({
-          ...prev,
-          [currentProfileIndex]: clampedIndex
-        }));
-      }
-    };
-
-    carousel.addEventListener('scroll', handleScroll);
-    return () => carousel.removeEventListener('scroll', handleScroll);
-  }, [profileImageIndices, images.length, currentProfileIndex, carouselSwipe.containerRef]);
 
   // Update details position when index changes
   useEffect(() => {
@@ -121,41 +80,30 @@ export default function ProfilePage() {
           <div key={profileIndex} className="profile-page">
             {/* Image Carousel */}
             <div className="carousel-wrapper">
-              <div 
-                className="image-carousel"
-                ref={isCurrentProfile ? carouselSwipe.containerRef : null}
-                {...(isCurrentProfile ? carouselSwipe.handlers : {})}
+              <Swiper
+                direction="vertical"
+                modules={[Pagination]}
+                pagination={{ clickable: true }}
+                className="image-swiper"
+                initialSlide={profileImageIndex}
+                onSlideChange={(swiper) => {
+                  const nextIndex = swiper.activeIndex;
+                  setProfileImageIndices(prev => ({
+                    ...prev,
+                    [profileIndex]: nextIndex
+                  }));
+                }}
               >
                 {profile.images.map((image, index) => (
-                  <img
-                    key={index}
-                    src={image}
-                    alt={`${profile.name} ${index + 1}`}
-                    className="carousel-image"
-                  />
-                ))}
-              </div>
-
-              {/* Carousel Indicators */}
-              <div className="carousel-indicators">
-                {profile.images.map((_, index) => {
-                  const isActive = index === profileImageIndex;
-                  return (
-                    <button
-                      key={index}
-                      type="button"
-                      className={`indicator ${isActive ? 'active' : ''}`}
-                      onClick={() => {
-                        setProfileImageIndices(prev => ({
-                          ...prev,
-                          [profileIndex]: index
-                        }));
-                      }}
-                      aria-label={`Go to image ${index + 1}`}
+                  <SwiperSlide key={index} className="image-slide">
+                    <img
+                      src={image}
+                      alt={`${profile.name} ${index + 1}`}
+                      className="carousel-image"
                     />
-                  );
-                })}
-              </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
 
               {/* Like/Dislike Buttons */}
               <div className="action-buttons">
