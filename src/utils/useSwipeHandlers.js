@@ -13,10 +13,14 @@ export const useHorizontalSwipe = (onSwipeEnd, sensitivity = 2) => {
 
   const handleTouchMove = (e) => {
     if (!containerRef.current) return;
-    e.preventDefault();
+    // Allow native horizontal scrolling on mobile for smoother swipe
+    // The scroll event in the parent will handle index updates
     const x = e.touches[0].pageX - containerRef.current.offsetLeft;
     const walk = (x - startXRef.current) * sensitivity;
-    containerRef.current.scrollLeft = scrollLeftRef.current - walk;
+    // Only interfere if the user drags a meaningful distance
+    if (Math.abs(walk) > 5) {
+      containerRef.current.scrollLeft = scrollLeftRef.current - walk;
+    }
   };
 
   const handleTouchEnd = () => {
