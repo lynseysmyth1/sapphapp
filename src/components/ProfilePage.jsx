@@ -1,133 +1,161 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import './ProfilePage.css';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/pagination';
 import { profiles } from '../data/profiles';
 import { HeartIcon } from './shared/Icons';
-import { useHorizontalSwipe } from '../utils/useSwipeHandlers';
+import { useHorizontalSwipe, useVerticalSwipe } from '../utils/useSwipeHandlers';
 
 export default function ProfilePage() {
   const [currentProfileIndex, setCurrentProfileIndex] = useState(0);
   const [profileImageIndices, setProfileImageIndices] = useState({});
   const [currentDetailIndex, setCurrentDetailIndex] = useState(0);
-  const profilesSwiperRef = useRef(null);
 
-  // Safety check to prevent crashes
-  if (!profiles || profiles.length === 0) {
-    return <div>No profiles available</div>;
-  }
+  const currentProfile = profiles[currentProfileIndex];
+  const images = currentProfile.images;
+  const details = currentProfile.details;
+  const currentImageIndex = profileImageIndices[currentProfileIndex] || 0;
 
-  const currentProfile = profiles[currentProfileIndex] || profiles[0];
-  const details = currentProfile?.details || [];
+  // Profile swipe handlers
+  const profileSwipe = useHorizontalSwipe((newIndex) => {
+    const clampedIndex = Math.max(0, Math.min(newIndex, profiles.length - 1));
+    setCurrentProfileIndex(clampedIndex);
+  });
+
+  // Carousel swipe handlers
+  const carouselSwipe = useVerticalSwipe((newIndex) => {
+    const clampedIndex = Math.max(0, Math.min(newIndex, images.length - 1));
+    setProfileImageIndices(prev => ({
+      ...prev,
+      [currentProfileIndex]: clampedIndex
+    }));
+  });
 
   // Details swipe handlers
   const detailSwipe = useHorizontalSwipe((newIndex) => {
     setCurrentDetailIndex(Math.max(0, Math.min(newIndex, details.length - 1)));
   });
 
+  // Update profile position when index changes
+  useEffect(() => {
+    if (profileSwipe.containerRef.current) {
+      profileSwipe.containerRef.current.scrollTo({
+        left: currentProfileIndex * profileSwipe.containerRef.current.offsetWidth,
+        behavior: 'smooth'
+      });
+    }
+  }, [currentProfileIndex, profileSwipe.containerRef]);
+
+  // Update carousel position when profile or image index changes
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (carouselSwipe.containerRef.current) {
+        const imageIndex = profileImageIndices[currentProfileIndex] || 0;
+        carouselSwipe.containerRef.current.scrollTo({
+          top: imageIndex * carouselSwipe.containerRef.current.offsetHeight,
+          behavior: 'smooth'
+        });
+      }
+    }, 0);
+    return () => clearTimeout(timer);
+  }, [profileImageIndices, currentProfileIndex, carouselSwipe.containerRef]);
+
+  // Track carousel scroll to update indicators
+  useEffect(() => {
+    const carousel = carouselSwipe.containerRef.current;
+    if (!carousel) return;
+
+    const handleScroll = () => {
+      const scrollTop = carousel.scrollTop;
+      const imageHeight = carousel.offsetHeight;
+      const newIndex = Math.round(scrollTop / imageHeight);
+      const clampedIndex = Math.max(0, Math.min(newIndex, images.length - 1));
+      const currentIndexForProfile = profileImageIndices[currentProfileIndex] || 0;
+      if (clampedIndex !== currentIndexForProfile) {
+        setProfileImageIndices(prev => ({
+          ...prev,
+          [currentProfileIndex]: clampedIndex
+        }));
+      }
+    };
+
+    carousel.addEventListener('scroll', handleScroll);
+    return () => carousel.removeEventListener('scroll', handleScroll);
+  }, [profileImageIndices, images.length, currentProfileIndex, carouselSwipe.containerRef]);
+
+  // Update details position when index changes
+  useEffect(() => {
+    if (detailSwipe.containerRef.current) {
+      const itemWidth = detailSwipe.containerRef.current.scrollWidth / details.length;
+      detailSwipe.containerRef.current.scrollTo({
+        left: currentDetailIndex * itemWidth,
+        behavior: 'smooth'
+      });
+    }
+  }, [currentDetailIndex, details.length, detailSwipe.containerRef]);
+
   // Like/Dislike handlers
   const handleLike = () => {
-    try {
-      console.log(`Profile ${currentProfile?.name} liked`);
-      if (profilesSwiperRef.current && currentProfileIndex < profiles.length - 1) {
-        profilesSwiperRef.current.slideNext();
-      }
-    } catch (error) {
-      console.error('Error in handleLike:', error);
+    console.log(`Profile ${currentProfile.name} liked`);
+    if (currentProfileIndex < profiles.length - 1) {
+      setCurrentProfileIndex(currentProfileIndex + 1);
     }
   };
 
   const handleDislike = () => {
-    try {
-      console.log(`Profile ${currentProfile?.name} disliked`);
-      if (profilesSwiperRef.current && currentProfileIndex < profiles.length - 1) {
-        profilesSwiperRef.current.slideNext();
-      }
-    } catch (error) {
-      console.error('Error in handleDislike:', error);
+    console.log(`Profile ${currentProfile.name} disliked`);
+    if (currentProfileIndex < profiles.length - 1) {
+      setCurrentProfileIndex(currentProfileIndex + 1);
     }
   };
 
   return (
-    <Swiper
-      direction="horizontal"
-      className="profiles-swiper"
-      slidesPerView={1}
-      spaceBetween={0}
-      allowTouchMove={true}
-      preventClicks={false}
-      preventClicksPropagation={false}
-      touchStartPreventDefault={false}
-      touchMoveStopPropagation={false}
-      resistance={true}
-      resistanceRatio={0.85}
-      watchOverflow={true}
-      simulateTouch={true}
-      touchRatio={1}
-      threshold={5}
-      onSwiper={(swiper) => {
-        if (swiper) {
-          profilesSwiperRef.current = swiper;
-        }
-      }}
-      onSlideChange={(swiper) => {
-        if (swiper && swiper.activeIndex !== undefined) {
-          const newIndex = Math.max(0, Math.min(swiper.activeIndex, profiles.length - 1));
-          if (newIndex !== currentProfileIndex) {
-            setCurrentProfileIndex(newIndex);
-          }
-        }
-      }}
-      initialSlide={currentProfileIndex}
+    <div 
+      className="profiles-container"
+      ref={profileSwipe.containerRef}
+      {...profileSwipe.handlers}
     >
       {profiles.map((profile, profileIndex) => {
         const isCurrentProfile = profileIndex === currentProfileIndex;
         const profileImageIndex = profileImageIndices[profileIndex] || 0;
         
         return (
-          <SwiperSlide key={profileIndex} className="profile-slide">
-            <div className="profile-page">
+          <div key={profileIndex} className="profile-page">
             {/* Image Carousel */}
             <div className="carousel-wrapper">
-              <Swiper
-                direction="vertical"
-                modules={[Pagination]}
-                pagination={{ clickable: true }}
-                className="image-swiper"
-                allowTouchMove={true}
-                preventClicks={false}
-                preventClicksPropagation={false}
-                touchStartPreventDefault={false}
-                touchMoveStopPropagation={false}
-                resistance={true}
-                resistanceRatio={0.85}
-                watchOverflow={true}
-                simulateTouch={true}
-                touchRatio={1}
-                threshold={5}
-                initialSlide={profileImageIndex}
-                onSlideChange={(swiper) => {
-                  if (swiper && swiper.activeIndex !== undefined) {
-                    const nextIndex = swiper.activeIndex;
-                    setProfileImageIndices(prev => ({
-                      ...prev,
-                      [profileIndex]: nextIndex
-                    }));
-                  }
-                }}
+              <div 
+                className="image-carousel"
+                ref={isCurrentProfile ? carouselSwipe.containerRef : null}
+                {...(isCurrentProfile ? carouselSwipe.handlers : {})}
               >
                 {profile.images.map((image, index) => (
-                  <SwiperSlide key={index} className="image-slide">
-                    <img
-                      src={image}
-                      alt={`${profile.name} ${index + 1}`}
-                      className="carousel-image"
-                    />
-                  </SwiperSlide>
+                  <img
+                    key={index}
+                    src={image}
+                    alt={`${profile.name} ${index + 1}`}
+                    className="carousel-image"
+                  />
                 ))}
-              </Swiper>
+              </div>
+
+              {/* Carousel Indicators */}
+              <div className="carousel-indicators">
+                {profile.images.map((_, index) => {
+                  const isActive = index === profileImageIndex;
+                  return (
+                    <button
+                      key={index}
+                      type="button"
+                      className={`indicator ${isActive ? 'active' : ''}`}
+                      onClick={() => {
+                        setProfileImageIndices(prev => ({
+                          ...prev,
+                          [profileIndex]: index
+                        }));
+                      }}
+                      aria-label={`Go to image ${index + 1}`}
+                    />
+                  );
+                })}
+              </div>
 
               {/* Like/Dislike Buttons */}
               <div className="action-buttons">
@@ -193,10 +221,9 @@ export default function ProfilePage() {
                 </div>
               </div>
             </div>
-            </div>
-          </SwiperSlide>
+          </div>
         );
       })}
-    </Swiper>
+    </div>
   );
 }
