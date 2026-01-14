@@ -132,7 +132,13 @@
 
 @media (max-width: 768px) {
   .splash-buttons {
+    bottom: auto;
+    top: 65%;
     padding: 1.5rem;
+  }
+
+  .logo-container {
+    top: 35%;
   }
 
   .logo-image {
