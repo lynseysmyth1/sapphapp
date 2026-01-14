@@ -3,8 +3,8 @@ import './SplashScreen.css';
 import backgroundImage from '../../uploaded_images/image1.jpg';
 import logoImage from '../../uploaded_images/logo.png';
 
-const APP_VERSION = '1.0.25';
-const LAST_CHANGE = 'Move profile name higher and increase...';
+const APP_VERSION = '1.0.27';
+const LAST_CHANGE = 'Update version to 1.0.24 in package.j...';
 
 export default function SplashScreen({ onSignIn }) {
   const [backgroundLoaded, setBackgroundLoaded] = useState(false);
