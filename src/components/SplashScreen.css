@@ -21,6 +21,29 @@
   overflow: hidden;
 }
 
+.version-label {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 20;
+  font-family: var(--font-secondary);
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  pointer-events: none;
+  user-select: none;
+  text-align: right;
+  line-height: 1.4;
+}
+
+.version-change {
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 2px;
+  font-style: italic;
+}
+
 .background-container {
   position: absolute;
   top: 0;

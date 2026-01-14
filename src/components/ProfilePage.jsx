@@ -14,8 +14,9 @@ export default function ProfilePage() {
   const [currentDetailIndex, setCurrentDetailIndex] = useState(0);
   const profilesSwiperRef = useRef(null);
 
-  const currentProfile = profiles[currentProfileIndex];
-  const details = currentProfile.details;
+  // Safety check to prevent crashes
+  const currentProfile = profiles[currentProfileIndex] || profiles[0];
+  const details = currentProfile?.details || [];
 
   // Details swipe handlers
   const detailSwipe = useHorizontalSwipe((newIndex) => {
@@ -24,16 +25,24 @@ export default function ProfilePage() {
 
   // Like/Dislike handlers
   const handleLike = () => {
-    console.log(`Profile ${currentProfile.name} liked`);
-    if (profilesSwiperRef.current && currentProfileIndex < profiles.length - 1) {
-      profilesSwiperRef.current.slideNext();
+    try {
+      console.log(`Profile ${currentProfile?.name} liked`);
+      if (profilesSwiperRef.current && currentProfileIndex < profiles.length - 1) {
+        profilesSwiperRef.current.slideNext();
+      }
+    } catch (error) {
+      console.error('Error in handleLike:', error);
     }
   };
 
   const handleDislike = () => {
-    console.log(`Profile ${currentProfile.name} disliked`);
-    if (profilesSwiperRef.current && currentProfileIndex < profiles.length - 1) {
-      profilesSwiperRef.current.slideNext();
+    try {
+      console.log(`Profile ${currentProfile?.name} disliked`);
+      if (profilesSwiperRef.current && currentProfileIndex < profiles.length - 1) {
+        profilesSwiperRef.current.slideNext();
+      }
+    } catch (error) {
+      console.error('Error in handleDislike:', error);
     }
   };
 
@@ -44,17 +53,23 @@ export default function ProfilePage() {
       slidesPerView={1}
       spaceBetween={0}
       allowTouchMove={true}
-      preventClicks={true}
-      preventClicksPropagation={true}
-      touchStartPreventDefault={true}
-      touchMoveStopPropagation={false}
+      preventClicks={false}
+      preventClicksPropagation={false}
+      touchStartPreventDefault={false}
+      touchMoveStopPropagation={true}
       resistance={true}
       resistanceRatio={0.85}
+      watchOverflow={true}
       onSwiper={(swiper) => {
         profilesSwiperRef.current = swiper;
       }}
       onSlideChange={(swiper) => {
-        setCurrentProfileIndex(swiper.activeIndex);
+        const newIndex = Math.max(0, Math.min(swiper.activeIndex, profiles.length - 1));
+        setCurrentProfileIndex(newIndex);
+      }}
+      onTouchStart={(swiper, event) => {
+        // Prevent conflicts with nested Swiper
+        event.stopPropagation();
       }}
       initialSlide={currentProfileIndex}
     >
@@ -73,12 +88,14 @@ export default function ProfilePage() {
                 pagination={{ clickable: true }}
                 className="image-swiper"
                 allowTouchMove={true}
-                preventClicks={true}
-                preventClicksPropagation={true}
-                touchStartPreventDefault={true}
-                touchMoveStopPropagation={false}
+                preventClicks={false}
+                preventClicksPropagation={false}
+                touchStartPreventDefault={false}
+                touchMoveStopPropagation={true}
                 resistance={true}
                 resistanceRatio={0.85}
+                watchOverflow={true}
+                nested={true}
                 initialSlide={profileImageIndex}
                 onSlideChange={(swiper) => {
                   const nextIndex = swiper.activeIndex;
@@ -86,6 +103,10 @@ export default function ProfilePage() {
                     ...prev,
                     [profileIndex]: nextIndex
                   }));
+                }}
+                onTouchStart={(swiper, event) => {
+                  // Stop propagation to parent Swiper
+                  event.stopPropagation();
                 }}
               >
                 {profile.images.map((image, index) => (

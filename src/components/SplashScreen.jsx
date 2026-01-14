@@ -3,6 +3,9 @@ import './SplashScreen.css';
 import backgroundImage from '../../uploaded_images/image1.jpg';
 import logoImage from '../../uploaded_images/logo.png';
 
+const APP_VERSION = '1.0.0';
+const LAST_CHANGE = 'Fix page reload on swipe';
+
 export default function SplashScreen({ onSignIn }) {
   const [backgroundLoaded, setBackgroundLoaded] = useState(false);
   const [logoLoaded, setLogoLoaded] = useState(false);
@@ -23,6 +26,10 @@ export default function SplashScreen({ onSignIn }) {
 
   return (
     <div className="splash-container">
+      <div className="version-label">
+        <div>v{APP_VERSION}</div>
+        <div className="version-change">{LAST_CHANGE}</div>
+      </div>
       <div className="background-container">
         <img
           src={backgroundImage}
