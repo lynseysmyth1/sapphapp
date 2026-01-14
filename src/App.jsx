@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SplashScreen from './components/SplashScreen';
+import PasswordPage from './components/PasswordPage';
 import ProfilePage from './components/ProfilePage';
 import ChatPage from './components/ChatPage';
 import LikesPage from './components/LikesPage';
@@ -7,10 +8,21 @@ import BottomNavigation from './components/BottomNavigation';
 import './App.css';
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [showSplash, setShowSplash] = useState(true);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [currentView, setCurrentView] = useState('home');
   const [likesPageKey, setLikesPageKey] = useState(0);
+
+  // Check authentication on mount
+  useEffect(() => {
+    const authenticated = localStorage.getItem('sapph_authenticated') === 'true';
+    setIsAuthenticated(authenticated);
+  }, []);
+
+  const handlePasswordCorrect = () => {
+    setIsAuthenticated(true);
+  };
 
   const handleSignIn = () => {
     setIsTransitioning(true);
@@ -30,6 +42,11 @@ function App() {
     }
     setCurrentView(view);
   };
+
+  // Show password page if not authenticated
+  if (!isAuthenticated) {
+    return <PasswordPage onPasswordCorrect={handlePasswordCorrect} />;
+  }
 
   return (
     <div className="app-wrapper">
