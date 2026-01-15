@@ -42,11 +42,13 @@
   min-height: 100vh;
   background-color: var(--color-background);
   overflow-x: hidden;
-  overflow-y: visible;
+  overflow-y: auto;
   flex-shrink: 0;
   scroll-snap-align: start;
   padding-bottom: 65px;
   position: relative;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: auto;
 }
 
 /* Image Carousel */
@@ -58,6 +60,7 @@
   background-color: var(--color-background);
   z-index: 1;
   margin-bottom: 30px;
+  pointer-events: auto;
 }
 
 /* Image Carousel */
@@ -79,7 +82,7 @@
   background-color: var(--color-background);
   z-index: 1;
   touch-action: pan-y;
-  overscroll-behavior-y: contain;
+  overscroll-behavior-y: auto;
 }
 
 .image-carousel:active {
@@ -248,6 +251,8 @@
   max-width: 600px;
   margin: 0 auto;
   margin-top: -17px;
+  position: relative;
+  z-index: 0;
 }
 
 .profile-name {
@@ -374,7 +379,13 @@
   .image-carousel {
     height: 100%;
     touch-action: pan-y;
-    overscroll-behavior-y: contain;
+    overscroll-behavior-y: auto;
+  }
+  
+  .profile-page {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: auto;
   }
   
   .carousel-image {
