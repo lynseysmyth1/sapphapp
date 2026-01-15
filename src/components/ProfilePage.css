@@ -206,6 +206,25 @@
   justify-content: center;
 }
 
+.wave-button {
+  background-color: var(--color-primary);
+}
+
+.wave-button .button-icon {
+  width: 38px;
+  height: auto;
+  display: block;
+  margin: auto;
+}
+
+.wave-button .button-icon path,
+.wave-button svg path,
+.wave-button .button-icon svg path {
+  fill: white !important;
+  fill: #ffffff !important;
+}
+
+
 .like-button .heart-icon {
   width: 31px;
   height: 31px;

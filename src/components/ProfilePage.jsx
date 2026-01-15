@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './ProfilePage.css';
 import { profiles } from '../data/profiles';
-import { HeartIcon } from './shared/Icons';
+import { HeartIcon, WavingHandIcon } from './shared/Icons';
 import { useHorizontalSwipe, useVerticalSwipe } from '../utils/useSwipeHandlers';
 
 export default function ProfilePage() {
@@ -118,6 +118,12 @@ export default function ProfilePage() {
     }
   };
 
+  const handleWave = () => {
+    console.log(`Waved at ${currentProfile.name}`);
+    // Wave action - could open chat or send a wave notification
+  };
+
+
   return (
     <div 
       className="profiles-container"
@@ -170,7 +176,7 @@ export default function ProfilePage() {
                 })}
               </div>
 
-              {/* Like/Dislike Buttons */}
+              {/* Like/Dislike/Wave Buttons */}
               <div className="action-buttons">
                 <button 
                   className="action-button dislike-button" 
@@ -178,6 +184,13 @@ export default function ProfilePage() {
                   aria-label={`Dislike ${profile.name}`}
                 >
                   <span className="button-icon" aria-hidden="true">×</span>
+                </button>
+                <button 
+                  className="action-button wave-button" 
+                  onClick={handleWave}
+                  aria-label={`Wave at ${profile.name}`}
+                >
+                  <WavingHandIcon className="button-icon" />
                 </button>
                 <button 
                   className="action-button like-button" 
