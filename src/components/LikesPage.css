@@ -67,7 +67,7 @@
   transition: all 0.2s;
   font-family: var(--font-primary);
   font-weight: 600;
-  font-size: 16px;
+  font-size: 18px;
   color: var(--color-text-tertiary);
   position: relative;
 }
@@ -138,7 +138,7 @@
 }
 
 .tab-label {
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .likes-grid {
@@ -554,7 +554,7 @@
 
   .likes-tab {
     padding: 14px 16px;
-    font-size: 15px;
+    font-size: 17px;
   }
 
   .tab-icon {
@@ -568,7 +568,7 @@
   }
 
   .tab-label {
-    font-size: 15px;
+    font-size: 17px;
   }
   
   .likes-grid {
@@ -626,7 +626,7 @@
 
   .likes-tab {
     padding: 12px 12px;
-    font-size: 14px;
+    font-size: 16px;
     gap: 6px;
   }
 
@@ -641,7 +641,7 @@
   }
 
   .tab-label {
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .likes-grid {
