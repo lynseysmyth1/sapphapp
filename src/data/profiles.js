@@ -17,7 +17,6 @@ import person16 from '../../uploaded_images/person16.png';
 import person17 from '../../uploaded_images/person17.png';
 import person18 from '../../uploaded_images/person18.png';
 import person19 from '../../uploaded_images/person19.png';
-import image1 from '../../uploaded_images/image1.jpg';
 import nature1 from '../../uploaded_images/nature1.png';
 import nature2 from '../../uploaded_images/nature2.png';
 import nature3 from '../../uploaded_images/nature3.png';
@@ -86,15 +85,6 @@ const baseProfiles = [
     bio: "South London based musician and coffee addict. When I'm not in the studio, you'll find me at a gig or trying the latest brunch spot.",
     conversationStarter: 'What\'s the best gig you\'ve been to recently? Always looking for new music recommendations!',
     interests: 'Music, live gigs, coffee, vinyl collecting, brunch, street art, pub quizzes, cycling'
-  },
-  {
-    name: 'Jordan',
-    images: [image1, nature1, nature2, nature3, nature4],
-    details: ["24 | Woman | Bisexual | Soft butch | 5'5\" | London"],
-    lookingFor: 'Short term | Long term relationship',
-    bio: "West London local, fitness enthusiast and foodie. Love trying new restaurants and staying active. Always up for a weekend adventure!",
-    conversationStarter: 'What\'s your favorite workout or the best meal you\'ve had this week? Let\'s swap recommendations!',
-    interests: 'Fitness, gym, running, food, restaurants, hiking, travel, podcasts, cooking'
   },
   {
     name: 'Riley',
