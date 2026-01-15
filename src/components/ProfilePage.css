@@ -14,6 +14,7 @@
 .profiles-container {
   display: flex;
   overflow-x: auto;
+  overflow-y: hidden;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
@@ -39,7 +40,7 @@
 .profile-page {
   width: 100%;
   min-width: 100%;
-  min-height: 100vh;
+  height: 100vh;
   background-color: var(--color-background);
   overflow-x: hidden;
   overflow-y: auto;
@@ -49,6 +50,8 @@
   position: relative;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: auto;
+  touch-action: pan-y;
+  will-change: scroll-position;
 }
 
 /* Image Carousel */
@@ -253,6 +256,7 @@
   margin-top: -17px;
   position: relative;
   z-index: 0;
+  touch-action: pan-y;
 }
 
 .profile-name {
@@ -386,6 +390,25 @@
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior-y: auto;
+    touch-action: pan-y;
+    will-change: scroll-position;
+    height: 100vh;
+  }
+  
+  .profiles-container {
+    touch-action: pan-x;
+  }
+  
+  .profile-content {
+    touch-action: pan-y;
+  }
+  
+  .carousel-wrapper {
+    touch-action: none;
+  }
+  
+  .image-carousel {
+    touch-action: pan-y;
   }
   
   .carousel-image {

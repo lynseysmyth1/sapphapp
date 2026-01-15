@@ -2,23 +2,28 @@ import { useRef } from 'react';
 
 export const useHorizontalSwipe = (onSwipeEnd, sensitivity = 2) => {
   const startXRef = useRef(0);
+  const startYRef = useRef(0);
   const scrollLeftRef = useRef(0);
   const containerRef = useRef(null);
 
   const handleTouchStart = (e) => {
     if (!containerRef.current) return;
     startXRef.current = e.touches[0].pageX - containerRef.current.offsetLeft;
+    startYRef.current = e.touches[0].pageY;
     scrollLeftRef.current = containerRef.current.scrollLeft;
   };
 
   const handleTouchMove = (e) => {
     if (!containerRef.current) return;
-    // Allow native horizontal scrolling on mobile for smoother swipe
-    // The scroll event in the parent will handle index updates
     const x = e.touches[0].pageX - containerRef.current.offsetLeft;
-    const walk = (x - startXRef.current) * sensitivity;
-    // Only interfere if the user drags a meaningful distance
-    if (Math.abs(walk) > 5) {
+    const y = e.touches[0].pageY;
+    const deltaX = Math.abs(x - startXRef.current);
+    const deltaY = Math.abs(y - startYRef.current);
+    
+    // Only handle horizontal swipes if the movement is primarily horizontal
+    // This allows vertical scrolling to work normally
+    if (deltaX > deltaY && deltaX > 10) {
+      const walk = (x - startXRef.current) * sensitivity;
       containerRef.current.scrollLeft = scrollLeftRef.current - walk;
     }
   };
