@@ -3,8 +3,8 @@ import './SplashScreen.css';
 import backgroundImage from '../../uploaded_images/image1.jpg';
 import logoImage from '../../uploaded_images/logo.png';
 
-const APP_VERSION = '1.0.51';
-const LAST_CHANGE = 'Update version to 1.0.48';
+const APP_VERSION = '1.0.53';
+const LAST_CHANGE = 'Remove Jordan's profile from profiles...';
 
 export default function SplashScreen({ onSignIn }) {
   const [backgroundLoaded, setBackgroundLoaded] = useState(false);
