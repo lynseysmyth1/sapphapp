@@ -3,8 +3,8 @@ import './SplashScreen.css';
 import backgroundImage from '../../uploaded_images/image1.jpg';
 import logoImage from '../../uploaded_images/logo.png';
 
-const APP_VERSION = '1.0.47';
-const LAST_CHANGE = 'Trigger Vercel redeploy to clear cache';
+const APP_VERSION = '1.0.49';
+const LAST_CHANGE = 'Fix mobile scrolling: prevent horizon...';
 
 export default function SplashScreen({ onSignIn }) {
   const [backgroundLoaded, setBackgroundLoaded] = useState(false);
