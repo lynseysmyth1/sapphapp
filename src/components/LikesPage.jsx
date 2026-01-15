@@ -1,10 +1,23 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './LikesPage.css';
 import { likedProfiles } from '../data/profiles';
-import { BackArrowIcon, HeartIcon } from './shared/Icons';
+import { BackArrowIcon, HeartIcon, WavingHandIcon } from './shared/Icons';
 import { useVerticalSwipe, useHorizontalSwipe } from '../utils/useSwipeHandlers';
 
+// Filter out Sam, Riley, and Blake from likes and move them to friends
+const friendsToMove = ['Sam', 'Riley', 'Blake'];
+const filteredLikedProfiles = likedProfiles.filter(profile => !friendsToMove.includes(profile.name));
+const movedFriends = likedProfiles.filter(profile => friendsToMove.includes(profile.name));
+
+// Create friends data with only Sam, Riley, and Blake
+const friendsProfiles = movedFriends.map((profile, index) => ({
+  ...profile,
+  id: `friend-${index + 1}`,
+  friendDate: ['2 weeks ago', '1 week ago', '3 days ago'][index] || 'Recently'
+}));
+
 export default function LikesPage() {
+  const [activeTab, setActiveTab] = useState('likes');
   const [selectedProfile, setSelectedProfile] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [currentDetailIndex, setCurrentDetailIndex] = useState(0);
@@ -212,16 +225,57 @@ export default function LikesPage() {
     );
   }
 
-  // Show likes list view
+  // Get current profiles based on active tab
+  const currentProfiles = activeTab === 'likes' ? filteredLikedProfiles : friendsProfiles;
+  const dateLabel = activeTab === 'likes' ? 'Matched' : 'Friends since';
+
+  // Show likes/friends list view
   return (
     <div className="likes-page">
-      <div className="likes-header">
-        <h1 className="likes-title">Likes</h1>
-        <p className="likes-subtitle">People who liked you</p>
+      <div className="likes-header-container">
+        <div className="likes-header">
+          <h1 className="likes-title">{activeTab === 'likes' ? 'Likes' : 'Friends'}</h1>
+          <p className="likes-subtitle">
+            {activeTab === 'likes' ? 'People who liked you' : 'Your friends'}
+          </p>
+        </div>
+
+        {/* Tabs */}
+        <div className="likes-tabs">
+        <button
+          className={`likes-tab ${activeTab === 'likes' ? 'active' : ''}`}
+          onClick={() => {
+            setActiveTab('likes');
+            setSelectedProfile(null);
+          }}
+          aria-label="Likes tab"
+          aria-pressed={activeTab === 'likes'}
+        >
+          <HeartIcon 
+            className="tab-icon" 
+            fillColor={activeTab === 'likes' ? '#F06B4A' : '#999'}
+          />
+          <span className="tab-label">Likes</span>
+        </button>
+        <button
+          className={`likes-tab ${activeTab === 'friends' ? 'active' : ''}`}
+          onClick={() => {
+            setActiveTab('friends');
+            setSelectedProfile(null);
+          }}
+          aria-label="Friends tab"
+          aria-pressed={activeTab === 'friends'}
+        >
+          <div className="tab-icon-wrapper">
+            <WavingHandIcon className="tab-icon" fillColor="#F06B4A" strokeColor="#F06B4A" strokeWidth={3} />
+          </div>
+          <span className="tab-label">Friends</span>
+        </button>
+        </div>
       </div>
       
       <div className="likes-grid">
-        {likedProfiles.map((profile) => (
+        {currentProfiles.map((profile) => (
           <div 
             key={profile.id} 
             className="like-card"
@@ -247,7 +301,9 @@ export default function LikesPage() {
                   <h2 className="like-card-name">
                     {profile.name}, {profile.details[0].split('|')[0].trim()}
                   </h2>
-                  <p className="like-card-details">Matched {profile.matchedDate}</p>
+                  <p className="like-card-details">
+                    {dateLabel} {activeTab === 'likes' ? profile.matchedDate : profile.friendDate}
+                  </p>
                 </div>
               </div>
             </div>

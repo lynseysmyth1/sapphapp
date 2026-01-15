@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './ChatPage.css';
 import { matches } from '../data/matches';
-import { BackArrowIcon, SendIcon } from './shared/Icons';
+import { BackArrowIcon, SendIcon, HeartIcon, WavingHandIcon } from './shared/Icons';
 
 export default function ChatPage() {
   const [selectedMatch, setSelectedMatch] = useState(null);
@@ -103,7 +103,20 @@ export default function ChatPage() {
             />
             <div className="match-info">
               <div className="match-header">
-                <h3 className="match-name">{match.name}</h3>
+                <div className="match-name-container">
+                  <h3 className="match-name">{match.name}</h3>
+                  {(match.name === 'Katie' || match.name === 'Sarah' || match.name === 'Emma') && (
+                    <HeartIcon 
+                      className="match-heart-icon" 
+                      fillColor="#F06B4A"
+                    />
+                  )}
+                  {match.name === 'Sam' && (
+                    <div className="match-wave-icon-wrapper">
+                      <WavingHandIcon className="match-wave-icon" fillColor="#F06B4A" strokeColor="#F06B4A" strokeWidth={3} />
+                    </div>
+                  )}
+                </div>
                 <span className="match-timestamp">{match.timestamp}</span>
               </div>
               <div className="match-footer">

@@ -1,6 +1,7 @@
 import person1 from '../../uploaded_images/person1.jpg';
 import person2 from '../../uploaded_images/Person2.png';
 import person3 from '../../uploaded_images/Person3.png';
+import person7 from '../../uploaded_images/Person7.png';
 
 export const matches = [
   {
@@ -120,6 +121,46 @@ export const matches = [
         text: "I'd love to join you for a beach walk sometime!", 
         sender: 'me', 
         time: '3d ago' 
+      }
+    ]
+  },
+  {
+    id: 4,
+    name: 'Sam',
+    image: person7,
+    lastMessage: "That sounds great! Let me know when you're free",
+    timestamp: '5d ago',
+    unread: 0,
+    messages: [
+      { 
+        id: 1, 
+        text: "Hey Sam! I saw you're into music - what kind of gigs do you usually go to?", 
+        sender: 'me', 
+        time: 'Mon 1:00 PM' 
+      },
+      { 
+        id: 2, 
+        text: "Hey! I love indie and alternative rock mostly. There's this great venue in South London that has amazing local bands!", 
+        sender: 'them', 
+        time: 'Mon 3:30 PM' 
+      },
+      { 
+        id: 3, 
+        text: "That sounds awesome! I'd love to check it out sometime. Are you going to any shows soon?", 
+        sender: 'me', 
+        time: 'Mon 4:00 PM' 
+      },
+      { 
+        id: 4, 
+        text: "Yes! There's a band playing this weekend that I'm really excited about. Want to join? It's going to be a great night!", 
+        sender: 'them', 
+        time: 'Mon 5:15 PM' 
+      },
+      { 
+        id: 5, 
+        text: "That sounds great! Let me know when you're free", 
+        sender: 'me', 
+        time: '5d ago' 
       }
     ]
   }
