@@ -3,8 +3,8 @@ import './SplashScreen.css';
 import backgroundImage from '../../uploaded_images/image1.jpg';
 import logoImage from '../../uploaded_images/logo.png';
 
-const APP_VERSION = '1.0.43';
-const LAST_CHANGE = 'Increase tab label font size on likes...';
+const APP_VERSION = '1.0.45';
+const LAST_CHANGE = 'Fix mobile scrolling issue on Profile...';
 
 export default function SplashScreen({ onSignIn }) {
   const [backgroundLoaded, setBackgroundLoaded] = useState(false);
