@@ -3,8 +3,8 @@ import './SplashScreen.css';
 import backgroundImage from '../../uploaded_images/image1.jpg';
 import logoImage from '../../uploaded_images/logo.png';
 
-const APP_VERSION = '1.0.37';
-const LAST_CHANGE = 'Add friend/wave button with white wav...';
+const APP_VERSION = '1.0.39';
+const LAST_CHANGE = 'Add tabs to likes page, update chat i...';
 
 export default function SplashScreen({ onSignIn }) {
   const [backgroundLoaded, setBackgroundLoaded] = useState(false);

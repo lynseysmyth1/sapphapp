@@ -190,7 +190,7 @@ export default function ProfilePage() {
                   onClick={handleWave}
                   aria-label={`Wave at ${profile.name}`}
                 >
-                  <WavingHandIcon className="button-icon" />
+                  <WavingHandIcon className="button-icon" fillColor="#FFFFFF" strokeColor="#FFFFFF" strokeWidth={2.10} />
                 </button>
                 <button 
                   className="action-button like-button" 
