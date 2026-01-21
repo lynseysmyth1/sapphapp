@@ -1,6 +1,6 @@
 {
   "name": "sapph-dating-app",
-  "version": "1.0.65",
+  "version": "1.0.67",
   "type": "module",
   "scripts": {
     "dev": "vite",

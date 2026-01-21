@@ -8,7 +8,7 @@
   --color-text-tertiary: #999;
   --color-online: #4CAF50;
   --font-primary: 'Prompt', sans-serif;
-  --font-secondary: 'Open Sans', sans-serif;
+  --font-secondary: 'Lato', sans-serif;
 }
 
 .chat-page {
@@ -34,7 +34,7 @@
 .chat-list-title {
   font-family: var(--font-primary);
   font-weight: 900;
-  font-size: 36px;
+  font-size: 38px;
   color: var(--color-primary);
   margin: 0;
 }
@@ -398,7 +398,7 @@
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .chat-list-title {
-    font-size: 32px;
+    font-size: 34px;
   }
   
   .match-avatar {

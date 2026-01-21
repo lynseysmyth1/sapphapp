@@ -8,7 +8,7 @@
   --color-text-secondary: #666;
   --color-text-tertiary: #999;
   --font-primary: 'Prompt', sans-serif;
-  --font-secondary: 'Open Sans', sans-serif;
+  --font-secondary: 'Lato', sans-serif;
 }
 
 .profiles-container {
@@ -262,7 +262,7 @@
 .profile-name {
   font-family: var(--font-primary);
   font-weight: 900;
-  font-size: 72px;
+  font-size: 78px;
   color: var(--color-primary);
   margin: 0 0 4px 0;
   line-height: 1.2;
@@ -371,7 +371,7 @@
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .profile-name {
-    font-size: 58px;
+    font-size: 62px;
   }
   
   .carousel-wrapper {

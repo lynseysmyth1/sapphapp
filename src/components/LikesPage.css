@@ -7,7 +7,7 @@
   --color-text-secondary: #666;
   --color-text-tertiary: #999;
   --font-primary: 'Prompt', sans-serif;
-  --font-secondary: 'Open Sans', sans-serif;
+  --font-secondary: 'Lato', sans-serif;
 }
 
 .likes-page {
@@ -33,7 +33,7 @@
 .likes-title {
   font-family: var(--font-primary);
   font-weight: 900;
-  font-size: 36px;
+  font-size: 38px;
   color: var(--color-primary);
   margin: 0 0 4px 0;
 }
@@ -226,7 +226,7 @@
 }
 
 .like-card-date {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Lato', sans-serif;
   font-size: 11px;
   color: rgba(255, 255, 255, 0.7);
   margin-top: 4px;
@@ -471,7 +471,7 @@
 .profile-name {
   font-family: var(--font-primary);
   font-weight: 900;
-  font-size: 58px;
+  font-size: 62px;
   color: var(--color-primary);
   margin: 0 0 4px 0;
   line-height: 1.2;
@@ -545,7 +545,7 @@
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .likes-title {
-    font-size: 32px;
+    font-size: 34px;
   }
 
   .likes-tabs {
@@ -590,7 +590,7 @@
   }
 
   .profile-name {
-    font-size: 42px;
+    font-size: 45px;
   }
   
   .carousel-wrapper {

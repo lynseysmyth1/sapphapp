@@ -7,7 +7,7 @@
   --color-text-secondary: #666;
   --color-text-tertiary: #999;
   --font-primary: 'Prompt', sans-serif;
-  --font-secondary: 'Open Sans', sans-serif;
+  --font-secondary: 'Lato', sans-serif;
 }
 
 .splash-container {
@@ -72,7 +72,7 @@
 }
 
 .logo-image {
-  max-width: 875px;
+  max-width: 1150px;
   width: 100%;
   height: auto;
 }
@@ -165,7 +165,7 @@
   }
 
   .logo-image {
-    max-width: 563px;
+    max-width: 725px;
   }
 
   .btn-primary,
