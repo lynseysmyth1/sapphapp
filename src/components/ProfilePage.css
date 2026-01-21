@@ -333,11 +333,10 @@
 }
 
 .conversation-starter-section {
-  background-color: #FDF5F3;
+  background-color: #FEF0ED;
   border-radius: 12px;
-  padding: 16px 20px;
+  padding: 16px 0;
   position: relative;
-  border-left: 4px solid var(--color-primary);
   margin-bottom: 20px;
 }
 
@@ -347,6 +346,7 @@
 
 .conversation-starter-body {
 }
+
 
 /* Interests Tags */
 .interests-tags {
@@ -359,13 +359,13 @@
 .profile-page .interest-tag {
   display: inline-block;
   padding: 6px 12px;
-  background-color: var(--color-background);
+  background-color: transparent;
   border: 1px solid var(--color-primary);
   border-radius: 16px;
   font-family: var(--font-secondary);
   font-size: 14px;
-  color: #555555 !important;
-  font-weight: 400;
+  color: var(--color-primary) !important;
+  font-weight: 700;
 }
 
 /* Responsive adjustments */
