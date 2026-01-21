@@ -3,7 +3,7 @@
   --color-background: #fff;
   --color-background-light: #F9F7F5;
   --color-border: #F3EEEB;
-  --color-text-primary: #333;
+  --color-text-primary: #555555;
   --color-text-secondary: #666;
   --color-text-tertiary: #999;
   --font-primary: 'Prompt', sans-serif;
@@ -101,18 +101,12 @@
     width: 24px;
     height: 24px;
     margin-bottom: 1px;
-  }
-
-  .nav-icon.heart-icon {
+  }  .nav-icon.heart-icon {
     width: 24px;
     height: 24px;
-  }
-
-  .nav-label {
+  }  .nav-label {
     font-size: 11px;
-  }
-
-  .profile-page {
+  }  .profile-page {
     padding-bottom: 55px;
   }
 }
