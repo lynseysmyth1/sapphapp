@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './SplashScreen.css';
 import backgroundImage from '../../uploaded_images/image1.jpg';
-import logoImage from '../../uploaded_images/logo.png';
+import logoImage from '../../LOGOS FOR SAPPH /Orange logo.png';
 
-const APP_VERSION = '1.0.53';
-const LAST_CHANGE = 'Remove Jordan's profile from profiles...';
+const APP_VERSION = '1.0.55';
+const LAST_CHANGE = 'Fix syntax error: escape apostrophe i...';
 
 export default function SplashScreen({ onSignIn }) {
   const [backgroundLoaded, setBackgroundLoaded] = useState(false);
