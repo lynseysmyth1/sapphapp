@@ -290,11 +290,11 @@
   display: none;
 }
 
-.details-row .detail-item {
+.profile-page .details-row .detail-item {
   font-family: var(--font-secondary);
   font-weight: 300;
   font-size: 16px;
-  color: var(--color-primary);
+  color: #555555 !important;
   flex-shrink: 0;
   scroll-snap-align: start;
   white-space: nowrap;
@@ -317,16 +317,16 @@
   letter-spacing: 0.5px;
 }
 
-.section-body {
+.profile-page .section-body {
   font-family: var(--font-secondary);
   font-size: 16px;
-  color: var(--color-primary);
+  color: #555555 !important;
   margin: 0 0 20px 0;
   line-height: 1.5;
   font-weight: 400;
 }
 
-.section-body.looking-for-body {
+.profile-page .section-body.looking-for-body {
   font-size: 16px;
   font-weight: 400;
   margin-bottom: 20px;
@@ -356,7 +356,7 @@
   margin-top: 8px;
 }
 
-.interest-tag {
+.profile-page .interest-tag {
   display: inline-block;
   padding: 6px 12px;
   background-color: var(--color-background);
@@ -364,7 +364,7 @@
   border-radius: 16px;
   font-family: var(--font-secondary);
   font-size: 14px;
-  color: var(--color-primary);
+  color: #555555 !important;
   font-weight: 400;
 }
 

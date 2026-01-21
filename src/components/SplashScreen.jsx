@@ -3,8 +3,8 @@ import './SplashScreen.css';
 import backgroundImage from '../../uploaded_images/image1.jpg';
 import logoImage from '../../LOGOS FOR SAPPH /White logo.png';
 
-const APP_VERSION = '1.0.59';
-const LAST_CHANGE = 'Change homepage logo to White logo';
+const APP_VERSION = '1.0.61';
+const LAST_CHANGE = 'Update body copy color to #555555 to ...';
 
 export default function SplashScreen({ onSignIn }) {
   const [backgroundLoaded, setBackgroundLoaded] = useState(false);
