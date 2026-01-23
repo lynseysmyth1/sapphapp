@@ -6,6 +6,8 @@ import ChatPage from './components/ChatPage';
 import LikesPage from './components/LikesPage';
 import BottomNavigation from './components/BottomNavigation';
 import ErrorBoundary from './components/ErrorBoundary';
+import CookieBanner from './components/CookieBanner';
+import { initGA, trackPageView } from './utils/analytics';
 import './App.css';
 
 function App() {
@@ -15,11 +17,22 @@ function App() {
   const [currentView, setCurrentView] = useState('home');
   const [likesPageKey, setLikesPageKey] = useState(0);
 
-  // Check authentication on mount
+  // Check authentication on mount and initialize GA
   useEffect(() => {
     const authenticated = localStorage.getItem('sapph_authenticated') === 'true';
     setIsAuthenticated(authenticated);
+    
+    // Initialize Google Analytics if user has already accepted all cookies
+    initGA();
   }, []);
+
+  // Track page views when currentView changes
+  useEffect(() => {
+    if (isAuthenticated && !showSplash) {
+      const pageName = currentView === 'home' ? '/' : `/${currentView}`;
+      trackPageView(pageName);
+    }
+  }, [currentView, isAuthenticated, showSplash]);
 
   const handlePasswordCorrect = () => {
     setIsAuthenticated(true);
@@ -46,29 +59,37 @@ function App() {
 
   // Show password page if not authenticated
   if (!isAuthenticated) {
-    return <PasswordPage onPasswordCorrect={handlePasswordCorrect} />;
+    return (
+      <>
+        <PasswordPage onPasswordCorrect={handlePasswordCorrect} />
+        <CookieBanner />
+      </>
+    );
   }
 
   return (
-    <div className="app-wrapper">
-      {showSplash && (
+    <>
+      <div className="app-wrapper">
+        {showSplash && (
+          <div 
+            className={`splash-transition ${isTransitioning ? 'fade-out' : 'fade-in'}`}
+          >
+            <SplashScreen onSignIn={handleSignIn} />
+          </div>
+        )}
         <div 
-          className={`splash-transition ${isTransitioning ? 'fade-out' : 'fade-in'}`}
+          className={`main-content-transition ${(!showSplash || isTransitioning) ? 'fade-in' : ''}`}
         >
-          <SplashScreen onSignIn={handleSignIn} />
+          <ErrorBoundary>
+            {currentView === 'home' && <ProfilePage />}
+            {currentView === 'likes' && <LikesPage key={likesPageKey} />}
+            {currentView === 'chat' && <ChatPage />}
+          </ErrorBoundary>
+          <BottomNavigation currentView={currentView} onNavigate={handleNavigate} />
         </div>
-      )}
-      <div 
-        className={`main-content-transition ${(!showSplash || isTransitioning) ? 'fade-in' : ''}`}
-      >
-        <ErrorBoundary>
-          {currentView === 'home' && <ProfilePage />}
-          {currentView === 'likes' && <LikesPage key={likesPageKey} />}
-          {currentView === 'chat' && <ChatPage />}
-        </ErrorBoundary>
-        <BottomNavigation currentView={currentView} onNavigate={handleNavigate} />
       </div>
-    </div>
+      <CookieBanner />
+    </>
   );
 }
 
