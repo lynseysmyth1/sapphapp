@@ -27,7 +27,7 @@ const baseProfiles = [
     name: 'Katie',
     images: [person1, nature1, nature2, nature3, nature4],
     details: ["29 | Woman | Lesbian | Tomboy | 5'5\" | London"],
-    lookingFor: 'Long term relationship | Friends',
+    lookingFor: 'Long term relationship | Friends | Femme',
     bio: "East London based, looking to make new friends and maybe find my soulmate too. Let's survive winter together x",
     conversationStarter: 'Ask me about mescal cocktails, dystopian tv or David Lynch if you want a good opener!',
     interests: 'Photography, cooking, dancing, F1, Football, Netball, Cocktail making, nature'
@@ -45,7 +45,7 @@ const baseProfiles = [
     name: 'Emma',
     images: [person3, nature1, nature2, nature3, nature4],
     details: ["31 | Woman | Lesbian | Androgynous | 5'4\" | Brighton"],
-    lookingFor: 'Friends | Long term relationship',
+    lookingFor: 'Friends | Femme | Long term relationship',
     bio: "Brighton beach lover, passionate about sustainability and making the world a better place. Let's connect!",
     conversationStarter: 'What\'s your favorite way to spend a Sunday morning? I love a good brunch!',
     interests: 'Sustainability, vegan cooking, beach walks, cycling, podcasts, activism'
@@ -63,7 +63,7 @@ const baseProfiles = [
     name: 'Alex',
     images: [person5, nature1, nature2, nature3, nature4],
     details: ["28 | Woman | Lesbian | Chapstick | 5'8\" | Bristol"],
-    lookingFor: 'Friends | Short term | Long term relationship',
+    lookingFor: 'Friends | Femme | Short term | Long term relationship',
     bio: "Bristol local, love good food and great company. Always down for a spontaneous adventure or a cozy night in.",
     conversationStarter: 'What\'s your go-to comfort food? Mine is definitely homemade pasta!',
     interests: 'Cooking, board games, rock climbing, craft beer, stand-up comedy, weekend markets'
@@ -81,7 +81,7 @@ const baseProfiles = [
     name: 'Sam',
     images: [person7, nature1, nature2, nature3, nature4],
     details: ["30 | Woman | Queer | Androgynous | 5'7\" | London"],
-    lookingFor: 'Friends | Long term relationship',
+    lookingFor: 'Friends | Femme | Long term relationship',
     bio: "South London based musician and coffee addict. When I'm not in the studio, you'll find me at a gig or trying the latest brunch spot.",
     conversationStarter: 'What\'s the best gig you\'ve been to recently? Always looking for new music recommendations!',
     interests: 'Music, live gigs, coffee, vinyl collecting, brunch, street art, pub quizzes, cycling'
@@ -90,7 +90,7 @@ const baseProfiles = [
     name: 'Riley',
     images: [person8, nature1, nature2, nature3, nature4],
     details: ["32 | Woman | Lesbian | Chapstick | 5'9\" | London"],
-    lookingFor: 'Long term relationship | Friends',
+    lookingFor: 'Long term relationship | Friends | Femme',
     bio: "Central London professional by day, bookworm and wine enthusiast by night. Love deep conversations and discovering new bookshops.",
     conversationStarter: 'What\'s the last book that really moved you? I\'m always looking for my next great read!',
     interests: 'Reading, books, wine, bookshops, museums, theatre, dinner parties, philosophy, writing'
@@ -99,7 +99,7 @@ const baseProfiles = [
     name: 'Taylor',
     images: [person9, nature1, nature2, nature3, nature4],
     details: ["29 | Woman | Queer | Tomboy | 5'4\" | London"],
-    lookingFor: 'Friends | Short term | Long term relationship',
+    lookingFor: 'Friends | Femme | Short term | Long term relationship',
     bio: "East London transplant, working in tech and passionate about queer culture. Love a good drag show or exploring the city's nightlife.",
     conversationStarter: 'What\'s your favorite queer space in London? Always looking to discover new spots!',
     interests: 'Tech, drag shows, queer culture, nightlife, coding, board games, comedy shows, street food'
@@ -126,7 +126,7 @@ const baseProfiles = [
     name: 'Quinn',
     images: [person12, nature1, nature2, nature3, nature4],
     details: ["30 | Woman | Queer | Soft butch | 5'5\" | London"],
-    lookingFor: 'Friends | Long term relationship',
+    lookingFor: 'Friends | Femme | Long term relationship',
     bio: "South London based yoga instructor and wellness enthusiast. Love early morning practices and finding balance in city life.",
     conversationStarter: 'What\'s your favorite way to unwind after a long day? I\'m always looking for new self-care tips!',
     interests: 'Yoga, wellness, meditation, healthy cooking, hiking, reading, tea, mindfulness'
@@ -135,7 +135,7 @@ const baseProfiles = [
     name: 'Avery',
     images: [person13, nature1, nature2, nature3, nature4],
     details: ["28 | Woman | Lesbian | Chapstick | 5'8\" | London"],
-    lookingFor: 'Long term relationship | Friends',
+    lookingFor: 'Long term relationship | Friends | Femme',
     bio: "Central London professional, working in finance but passionate about music and live events. Love discovering new artists and venues.",
     conversationStarter: 'What\'s the best live show you\'ve been to this year? Always looking for new music recommendations!',
     interests: 'Music, live events, finance, cocktails, rooftop bars, networking, travel, podcasts'
@@ -162,7 +162,7 @@ const baseProfiles = [
     name: 'Sage',
     images: [person16, nature1, nature2, nature3, nature4],
     details: ["24 | Woman | Queer | Androgynous | 5'6\" | London"],
-    lookingFor: 'Friends | Short term | Long term relationship',
+    lookingFor: 'Friends | Femme | Short term | Long term relationship',
     bio: "West London local, working in tech and passionate about sustainability. Love coding, gardening, and making a positive impact.",
     conversationStarter: 'What\'s your favorite sustainable practice? Always looking for new ways to reduce my environmental footprint!',
     interests: 'Tech, coding, sustainability, gardening, cycling, zero waste, climate action, plant-based cooking'
@@ -171,7 +171,7 @@ const baseProfiles = [
     name: 'River',
     images: [person17, nature1, nature2, nature3, nature4],
     details: ["29 | Woman | Lesbian | Soft butch | 5'7\" | London"],
-    lookingFor: 'Long term relationship | Friends',
+    lookingFor: 'Long term relationship | Friends | Femme',
     bio: "South London based writer and poet, finding beauty in words and everyday moments. Love bookshops and quiet cafes.",
     conversationStarter: 'What\'s the last poem or piece of writing that moved you? I\'m always looking for new literary inspiration!',
     interests: 'Writing, poetry, books, bookshops, cafes, journaling, spoken word, literature'

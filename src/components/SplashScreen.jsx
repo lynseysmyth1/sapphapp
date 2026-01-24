@@ -3,8 +3,8 @@ import './SplashScreen.css';
 import backgroundImage from '../../uploaded_images/image1.jpg';
 import logoImage from '../../LOGOS FOR SAPPH /White logo.png';
 
-const APP_VERSION = '1.0.75';
-const LAST_CHANGE = 'Remove cookie consent banner and Goog...';
+const APP_VERSION = '1.0.77';
+const LAST_CHANGE = 'Update mobile profile layout: full-bl...';
 
 export default function SplashScreen({ onSignIn }) {
   const [backgroundLoaded, setBackgroundLoaded] = useState(false);

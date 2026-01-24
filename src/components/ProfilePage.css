@@ -59,9 +59,9 @@
   position: relative;
   width: 100%;
   height: 60vh;
-  overflow: hidden;
+  overflow: visible;
   background-color: transparent;
-  z-index: 1;
+  z-index: 100;
   margin-bottom: 30px;
   pointer-events: auto;
 }
@@ -69,14 +69,14 @@
 /* Card-style Container */
 .profile-accent-bar {
   background-color: var(--color-background);
-  padding: 24px 20px;
+  padding: 16px 20px 24px 20px;
   margin: 0;
-  border-radius: 16px 16px 0 0;
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08);
+  border-radius: 20px 20px 0 0;
   display: none;
-  margin-top: -16px;
+  margin-top: -12px;
   position: relative;
-  z-index: 2;
+  z-index: 10;
+  text-align: left;
 }
 
 .profile-name-accent {
@@ -84,8 +84,9 @@
   font-weight: 900;
   font-size: 48px;
   color: var(--color-primary);
-  margin: 0 0 8px 0;
+  margin: 0 0 6px 0;
   line-height: 1.2;
+  text-align: left;
 }
 
 .details-accent {
@@ -94,6 +95,8 @@
   font-size: 16px;
   color: #555555;
   margin: 0;
+  line-height: 1.4;
+  text-align: left;
 }
 
 /* Image Carousel */
@@ -179,11 +182,11 @@
 /* Like/Dislike Buttons */
 .action-buttons {
   position: absolute;
-  bottom: -25px;
+  bottom: 120px;
   right: 16px;
   display: flex;
   gap: 12px;
-  z-index: 200;
+  z-index: 1000;
   pointer-events: auto;
   visibility: visible !important;
   opacity: 1 !important;
@@ -289,6 +292,7 @@
   position: relative;
   z-index: 0;
   touch-action: pan-y;
+  text-align: left;
 }
 
 .profile-name {
@@ -298,6 +302,7 @@
   color: var(--color-primary);
   margin: 0 0 4px 0;
   line-height: 1.2;
+  text-align: left;
 }
 
 /* Swipeable Details Row */
@@ -332,6 +337,7 @@
   white-space: nowrap;
   min-width: 100%;
   padding-right: 20px;
+  text-align: left;
 }
 
 /* Profile Sections */
@@ -347,6 +353,7 @@
   margin: 0 0 8px 0;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  text-align: left;
 }
 
 .profile-page .section-body {
@@ -356,6 +363,7 @@
   margin: 0 0 20px 0;
   line-height: 1.5;
   font-weight: 400;
+  text-align: left;
 }
 
 .profile-page .section-body.looking-for-body {
@@ -367,9 +375,10 @@
 .conversation-starter-section {
   background-color: #FEF0ED;
   border-radius: 12px;
-  padding: 16px 0;
+  padding: 16px 0 16px 4px;
   position: relative;
   margin-bottom: 20px;
+  margin-left: -4px;
 }
 
 .conversation-starter-section .section-label {
@@ -411,9 +420,13 @@
     aspect-ratio: 3 / 4 !important;
     height: auto !important;
     margin-bottom: 0 !important;
-    overflow: hidden !important;
+    overflow: visible !important;
     background-color: transparent !important;
     position: relative;
+  }
+  
+  .image-carousel {
+    overflow: hidden !important;
   }
   
   .image-carousel {
@@ -428,11 +441,15 @@
   
   /* Hide desktop name/details on mobile */
   .profile-name-desktop {
-    display: none;
+    display: none !important;
   }
   
   .details-row-desktop {
-    display: none;
+    display: none !important;
+  }
+  
+  .profile-content .details-row {
+    display: none !important;
   }
   
   /* Adjust profile content spacing on mobile */
@@ -490,9 +507,9 @@
   }
 
   .action-buttons {
-    bottom: -25px;
+    bottom: 140px;
     right: 16px;
-    z-index: 200;
+    z-index: 1000;
     position: absolute;
     display: flex;
     gap: 12px;
