@@ -145,7 +145,7 @@
   font-weight: 500;
   margin-top: 0.5rem;
   transition: opacity 0.3s ease;
-  font-family: 'Prompt', sans-serif;
+  font-family: 'Lato', sans-serif;
 }
 
 .sign-in-link:hover {

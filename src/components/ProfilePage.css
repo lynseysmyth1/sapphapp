@@ -59,11 +59,41 @@
   position: relative;
   width: 100%;
   height: 60vh;
-  overflow: visible;
-  background-color: var(--color-background);
+  overflow: hidden;
+  background-color: transparent;
   z-index: 1;
   margin-bottom: 30px;
   pointer-events: auto;
+}
+
+/* Card-style Container */
+.profile-accent-bar {
+  background-color: var(--color-background);
+  padding: 24px 20px;
+  margin: 0;
+  border-radius: 16px 16px 0 0;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08);
+  display: none;
+  margin-top: -16px;
+  position: relative;
+  z-index: 2;
+}
+
+.profile-name-accent {
+  font-family: var(--font-primary);
+  font-weight: 900;
+  font-size: 48px;
+  color: var(--color-primary);
+  margin: 0 0 8px 0;
+  line-height: 1.2;
+}
+
+.details-accent {
+  font-family: var(--font-secondary);
+  font-weight: 400;
+  font-size: 16px;
+  color: #555555;
+  margin: 0;
 }
 
 /* Image Carousel */
@@ -82,7 +112,7 @@
   position: relative;
   cursor: grab;
   user-select: none;
-  background-color: var(--color-background);
+  background-color: transparent;
   z-index: 1;
   touch-action: pan-y;
   overscroll-behavior-y: auto;
@@ -97,15 +127,17 @@
 }
 
 .carousel-image {
-  width: 100%;
-  height: 100%;
-  min-height: 100%;
-  object-fit: contain;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 100% !important;
+  object-fit: cover !important;
+  object-position: center center !important;
   flex-shrink: 0;
   scroll-snap-align: start;
-  background-color: var(--color-background);
+  background-color: transparent !important;
   display: block;
-  max-width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .carousel-indicators {
@@ -292,7 +324,7 @@
 
 .profile-page .details-row .detail-item {
   font-family: var(--font-secondary);
-  font-weight: 300;
+  font-weight: 400;
   font-size: 16px;
   color: #555555 !important;
   flex-shrink: 0;
@@ -375,9 +407,38 @@
   }
   
   .carousel-wrapper {
-    height: 60vh;
-    min-height: 60vh;
-    margin-bottom: 30px;
+    width: 100% !important;
+    aspect-ratio: 3 / 4 !important;
+    height: auto !important;
+    margin-bottom: 0 !important;
+    overflow: hidden !important;
+    background-color: transparent !important;
+    position: relative;
+  }
+  
+  .image-carousel {
+    background-color: transparent !important;
+    overflow: hidden !important;
+  }
+  
+  /* Show card-style container on mobile */
+  .profile-accent-bar {
+    display: block;
+  }
+  
+  /* Hide desktop name/details on mobile */
+  .profile-name-desktop {
+    display: none;
+  }
+  
+  .details-row-desktop {
+    display: none;
+  }
+  
+  /* Adjust profile content spacing on mobile */
+  .profile-content {
+    margin-top: 0 !important;
+    padding-top: 20px;
   }
   
   .image-carousel {
@@ -412,10 +473,15 @@
   }
   
   .carousel-image {
-    width: 100%;
-    height: 100%;
-    min-height: 100%;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
     display: block;
+    margin: 0 !important;
+    padding: 0 !important;
+    background-color: transparent !important;
   }
   
   .profile-content {

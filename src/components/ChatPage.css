@@ -153,8 +153,9 @@
 
 .match-last-message {
   font-family: var(--font-secondary);
-  font-size: 14px;
-  color: var(--color-text-secondary);
+  font-size: 16px;
+  font-weight: 400;
+  color: #555555;
   margin: 0;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -294,6 +295,7 @@
 .message-text {
   font-family: var(--font-secondary);
   font-size: 16px;
+  font-weight: 400;
   line-height: 1.5;
   margin: 0 0 4px 0;
   word-wrap: break-word;

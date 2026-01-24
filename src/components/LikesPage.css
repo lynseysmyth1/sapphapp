@@ -501,9 +501,9 @@
 
 .details-row .detail-item {
   font-family: var(--font-secondary);
-  font-weight: 300;
+  font-weight: 400;
   font-size: 16px;
-  color: var(--color-primary);
+  color: #555555;
   flex-shrink: 0;
   scroll-snap-align: start;
   white-space: nowrap;
@@ -531,15 +531,16 @@
 
 .section-body {
   font-family: var(--font-secondary);
-  font-size: 18px;
-  color: var(--color-primary);
+  font-size: 16px;
+  font-weight: 400;
+  color: #555555;
   margin: 0;
   line-height: 1.4;
 }
 
 .section-body.looking-for-body {
   font-size: 16px;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 /* Responsive adjustments */

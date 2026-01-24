@@ -154,6 +154,7 @@ export default function ProfilePage() {
                   />
                 ))}
               </div>
+              
 
               {/* Carousel Indicators */}
               <div className="carousel-indicators">
@@ -202,13 +203,21 @@ export default function ProfilePage() {
               </div>
             </div>
 
-            <div className="profile-content">
-              {/* Name */}
-              <h1 className="profile-name">{profile.name}</h1>
+            {/* Colored Accent Bar with Name and Details */}
+            <div className="profile-accent-bar">
+              <h1 className="profile-name-accent">{profile.name}</h1>
+              <div className="details-accent">
+                {profile.details[0]}
+              </div>
+            </div>
 
-              {/* Swipeable Details Row */}
+            <div className="profile-content">
+              {/* Name - Hidden on mobile, shown on desktop */}
+              <h1 className="profile-name profile-name-desktop">{profile.name}</h1>
+
+              {/* Swipeable Details Row - Hidden on mobile, shown on desktop */}
               <div 
-                className="details-row"
+                className="details-row details-row-desktop"
                 ref={isCurrentProfile ? detailSwipe.containerRef : null}
                 {...(isCurrentProfile ? detailSwipe.handlers : {})}
               >
