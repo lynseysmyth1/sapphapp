@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import './ProfilePage.css';
 import { profiles } from '../data/profiles';
 import { HeartIcon, WavingHandIcon } from './shared/Icons';
@@ -16,8 +16,14 @@ export default function ProfilePage() {
 
   // Profile swipe handlers
   const handleProfileSwipe = useCallback((newIndex) => {
+    isUserSwipingRef.current = true;
     const clampedIndex = Math.max(0, Math.min(newIndex, profiles.length - 1));
     setCurrentProfileIndex(clampedIndex);
+    
+    // Reset swipe flag after animation completes
+    setTimeout(() => {
+      isUserSwipingRef.current = false;
+    }, 300);
   }, []);
 
   const profileSwipe = useHorizontalSwipe(handleProfileSwipe);
@@ -40,15 +46,33 @@ export default function ProfilePage() {
 
   const detailSwipe = useHorizontalSwipe(handleDetailSwipe);
 
-  // Update profile position when index changes
+  // Track if user is actively swiping to prevent interference
+  const isUserSwipingRef = useRef(false);
+  const scrollTimeoutRef = useRef(null);
+
+  // Update profile position when index changes (but not during user swipe)
   useEffect(() => {
     const container = profileSwipe.containerRef.current;
-    if (!container) return;
+    if (!container || isUserSwipingRef.current) return;
 
-    container.scrollTo({
-      left: currentProfileIndex * container.offsetWidth,
-      behavior: 'smooth'
-    });
+    // Clear any existing timeout
+    if (scrollTimeoutRef.current) {
+      clearTimeout(scrollTimeoutRef.current);
+    }
+
+    // Small delay to avoid interfering with swipe gestures
+    scrollTimeoutRef.current = setTimeout(() => {
+      if (!isUserSwipingRef.current && container) {
+        const targetScroll = currentProfileIndex * container.offsetWidth;
+        // Only scroll if we're not already at the target position
+        if (Math.abs(container.scrollLeft - targetScroll) > 10) {
+          container.scrollTo({
+            left: targetScroll,
+            behavior: 'smooth'
+          });
+        }
+      }
+    }, 50);
 
     // Reset image index for new profile if not already set
     if (!profileImageIndices[currentProfileIndex] && currentProfileIndex !== 0) {
@@ -57,6 +81,12 @@ export default function ProfilePage() {
         [currentProfileIndex]: 0
       }));
     }
+
+    return () => {
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+    };
   }, [currentProfileIndex, profileImageIndices, profileSwipe.containerRef]);
 
   // Update carousel position when profile or image index changes

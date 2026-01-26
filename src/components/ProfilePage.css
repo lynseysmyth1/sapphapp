@@ -18,7 +18,7 @@
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
-  touch-action: pan-x;
+  touch-action: pan-x pan-y pinch-zoom;
   overscroll-behavior-x: contain;
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -27,6 +27,10 @@
   cursor: grab;
   user-select: none;
   padding-bottom: 65px;
+  /* Improve scroll performance */
+  will-change: scroll-position;
+  /* Better momentum scrolling on iOS */
+  -webkit-overflow-scrolling: touch;
 }
 
 .profiles-container:active {
