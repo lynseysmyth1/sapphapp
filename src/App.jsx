@@ -21,6 +21,21 @@ function App() {
   useEffect(() => {
     const authenticated = storage.getItem('sapph_authenticated') === 'true';
     setIsAuthenticated(authenticated);
+    
+    // Reset scroll position on mount
+    requestAnimationFrame(() => {
+      const mainContent = document.querySelector('.main-content-transition');
+      if (mainContent) {
+        mainContent.scrollTo({
+          top: 0,
+          behavior: 'instant'
+        });
+      }
+      window.scrollTo({
+        top: 0,
+        behavior: 'instant'
+      });
+    });
   }, []);
 
   const handlePasswordCorrect = useCallback(() => {
@@ -59,6 +74,21 @@ function App() {
       setLikesPageKey(prev => prev + 1);
     }
     setCurrentView(view);
+    
+    // Reset scroll position when navigating
+    requestAnimationFrame(() => {
+      const mainContent = document.querySelector('.main-content-transition');
+      if (mainContent) {
+        mainContent.scrollTo({
+          top: 0,
+          behavior: 'instant'
+        });
+      }
+      window.scrollTo({
+        top: 0,
+        behavior: 'instant'
+      });
+    });
   }, [currentView]);
 
   // Show password page if not authenticated
@@ -79,11 +109,13 @@ function App() {
         <div 
           className={`main-content-transition ${(!showSplash || isTransitioning) ? 'fade-in' : ''}`}
         >
-          <ErrorBoundary>
-            {currentView === 'home' && <ProfilePage />}
-            {currentView === 'likes' && <LikesPage key={likesPageKey} />}
-            {currentView === 'chat' && <ChatPage />}
-          </ErrorBoundary>
+          <div className="main-content-scrollable">
+            <ErrorBoundary>
+              {currentView === 'home' && <ProfilePage />}
+              {currentView === 'likes' && <LikesPage key={likesPageKey} />}
+              {currentView === 'chat' && <ChatPage />}
+            </ErrorBoundary>
+          </div>
           <BottomNavigation currentView={currentView} onNavigate={handleNavigate} />
         </div>
       </div>

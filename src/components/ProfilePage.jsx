@@ -8,6 +8,27 @@ export default function ProfilePage() {
   const [currentProfileIndex, setCurrentProfileIndex] = useState(0);
   const [profileImageIndices, setProfileImageIndices] = useState({});
   const [currentDetailIndex, setCurrentDetailIndex] = useState(0);
+  const profilePageRef = useRef(null);
+
+  // Reset scroll position on mount
+  useEffect(() => {
+    requestAnimationFrame(() => {
+      if (profilePageRef.current) {
+        profilePageRef.current.scrollTo({
+          top: 0,
+          behavior: 'instant'
+        });
+      }
+      // Also reset any parent scroll containers
+      const mainContent = document.querySelector('.main-content-scrollable');
+      if (mainContent) {
+        mainContent.scrollTo({
+          top: 0,
+          behavior: 'instant'
+        });
+      }
+    });
+  }, []);
 
   const currentProfile = useMemo(() => profiles[currentProfileIndex], [currentProfileIndex]);
   const images = useMemo(() => currentProfile.images, [currentProfile]);
@@ -181,7 +202,11 @@ export default function ProfilePage() {
         const profileImageIndex = profileImageIndices[profileIndex] || 0;
         
         return (
-          <div key={profileIndex} className="profile-page">
+          <div 
+            key={profileIndex} 
+            className="profile-page"
+            ref={isCurrentProfile ? profilePageRef : null}
+          >
             {/* Image Carousel */}
             <div className="carousel-wrapper">
               <div 
