@@ -44,10 +44,10 @@
 
 .main-content-scrollable {
   flex: 1;
-  overflow-y: auto;
+  overflow: hidden;
   overflow-x: hidden;
   width: 100%;
-  -webkit-overflow-scrolling: touch;
+  position: relative;
 }
 
 .main-content-transition.fade-in {

@@ -15,13 +15,7 @@ export default function ProfilePage() {
     // Use multiple RAFs to ensure DOM is ready
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        // Reset main scroll container
-        const mainContent = document.querySelector('.main-content-scrollable');
-        if (mainContent) {
-          mainContent.scrollTop = 0;
-        }
-        
-        // Reset all profile pages
+        // Reset all profile pages (vertical scroll)
         const profilePages = document.querySelectorAll('.profile-page');
         profilePages.forEach(page => {
           if (page) {
@@ -107,11 +101,6 @@ export default function ProfilePage() {
         const profilePages = document.querySelectorAll('.profile-page');
         if (profilePages[currentProfileIndex]) {
           profilePages[currentProfileIndex].scrollTop = 0;
-        }
-        // Also reset main scroll container
-        const mainContent = document.querySelector('.main-content-scrollable');
-        if (mainContent) {
-          mainContent.scrollTop = 0;
         }
       });
     }, 50);

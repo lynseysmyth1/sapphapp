@@ -3,8 +3,8 @@ import './SplashScreen.css';
 import backgroundImage from '../../uploaded_images/image1.jpg';
 import logoImage from '../../LOGOS FOR SAPPH /White logo.png';
 
-const APP_VERSION = '1.0.87';
-const LAST_CHANGE = 'fix: restore bottom navigation visibi...';
+const APP_VERSION = '1.0.89';
+const LAST_CHANGE = 'fix: ensure profile page loads at top...';
 
 export default function SplashScreen({ onSignIn }) {
   const [backgroundLoaded, setBackgroundLoaded] = useState(false);

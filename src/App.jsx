@@ -25,13 +25,7 @@ function App() {
     // Reset scroll position on mount - use double RAF for reliability
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        // Reset main scroll container
-        const mainContent = document.querySelector('.main-content-scrollable');
-        if (mainContent) {
-          mainContent.scrollTop = 0;
-        }
-        
-        // Reset all profile pages
+        // Reset all profile pages (vertical scroll)
         const profilePages = document.querySelectorAll('.profile-page');
         profilePages.forEach(page => {
           if (page) {
@@ -88,13 +82,7 @@ function App() {
     // Reset scroll position when navigating - use double RAF for reliability
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        // Reset main scroll container
-        const mainContent = document.querySelector('.main-content-scrollable');
-        if (mainContent) {
-          mainContent.scrollTop = 0;
-        }
-        
-        // Reset all profile pages
+        // Reset all profile pages (vertical scroll)
         const profilePages = document.querySelectorAll('.profile-page');
         profilePages.forEach(page => {
           if (page) {
