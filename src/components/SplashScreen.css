@@ -73,7 +73,7 @@
 
 .logo-image {
   max-width: min(1150px, 90vw);
-  width: 100%;
+  width: auto;
   height: auto;
   padding: 0 clamp(20px, 5vw, 40px);
   box-sizing: border-box;
@@ -171,7 +171,8 @@
   }
 
   .logo-image {
-    max-width: min(900px, 95vw);
+    width: clamp(300px, 85vw, 500px);
+    max-width: none;
     padding: 0 clamp(16px, 4vw, 24px);
   }
 
@@ -195,7 +196,8 @@
   }
 
   .logo-image {
-    max-width: min(850px, 92vw);
+    width: clamp(280px, 82vw, 480px);
+    max-width: none;
     padding: 0 clamp(14px, 3.5vw, 20px);
   }
 
@@ -219,7 +221,8 @@
   }
 
   .logo-image {
-    max-width: min(800px, 90vw);
+    width: clamp(260px, 80vw, 450px);
+    max-width: none;
     padding: 0 12px;
   }
 
@@ -243,7 +246,8 @@
   }
 
   .logo-image {
-    max-width: min(900px, 95vw);
+    width: clamp(300px, 85vw, 500px);
+    max-width: none;
     padding: 0 clamp(16px, 4vw, 24px);
   }
 

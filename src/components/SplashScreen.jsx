@@ -3,8 +3,8 @@ import './SplashScreen.css';
 import backgroundImage from '../../uploaded_images/image1.jpg';
 import logoImage from '../../LOGOS FOR SAPPH /White logo.png';
 
-const APP_VERSION = '1.0.97';
-const LAST_CHANGE = 'feat: increase logo size and move hig...';
+const APP_VERSION = '1.0.99';
+const LAST_CHANGE = 'chore: trigger deployment for v1.0.96';
 
 export default function SplashScreen({ onSignIn }) {
   const [backgroundLoaded, setBackgroundLoaded] = useState(false);
