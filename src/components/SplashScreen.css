@@ -166,11 +166,13 @@
   }
 
   .logo-container {
-    top: clamp(30%, 35%, 40%);
+    top: clamp(25%, 30%, 35%);
+    transform: translate(-50%, -50%);
   }
 
   .logo-image {
-    max-width: min(725px, 85vw);
+    max-width: min(900px, 95vw);
+    padding: 0 clamp(16px, 4vw, 24px);
   }
 
   .btn-primary,
@@ -188,11 +190,13 @@
   }
 
   .logo-container {
-    top: clamp(28%, 33%, 38%);
+    top: clamp(23%, 28%, 33%);
+    transform: translate(-50%, -50%);
   }
 
   .logo-image {
-    max-width: min(680px, 82vw);
+    max-width: min(850px, 92vw);
+    padding: 0 clamp(14px, 3.5vw, 20px);
   }
 
   .btn-primary,
@@ -210,11 +214,13 @@
   }
 
   .logo-container {
-    top: clamp(26%, 31%, 36%);
+    top: clamp(22%, 27%, 32%);
+    transform: translate(-50%, -50%);
   }
 
   .logo-image {
-    max-width: min(650px, 80vw);
+    max-width: min(800px, 90vw);
+    padding: 0 12px;
   }
 
   .btn-primary,
@@ -232,11 +238,13 @@
   }
 
   .logo-container {
-    top: clamp(30%, 35%, 40%);
+    top: clamp(25%, 30%, 35%);
+    transform: translate(-50%, -50%);
   }
 
   .logo-image {
-    max-width: min(725px, 85vw);
+    max-width: min(900px, 95vw);
+    padding: 0 clamp(16px, 4vw, 24px);
   }
 
   .btn-primary,

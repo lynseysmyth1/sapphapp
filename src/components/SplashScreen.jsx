@@ -3,8 +3,8 @@ import './SplashScreen.css';
 import backgroundImage from '../../uploaded_images/image1.jpg';
 import logoImage from '../../LOGOS FOR SAPPH /White logo.png';
 
-const APP_VERSION = '1.0.93';
-const LAST_CHANGE = 'fix: increase bottom padding to preve...';
+const APP_VERSION = '1.0.95';
+const LAST_CHANGE = 'fix: restore vertical scrolling for i...';
 
 export default function SplashScreen({ onSignIn }) {
   const [backgroundLoaded, setBackgroundLoaded] = useState(false);
