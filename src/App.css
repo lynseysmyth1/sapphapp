@@ -3,6 +3,8 @@
   width: 100%;
   height: 100vh;
   overflow: hidden;
+  max-width: 100vw;
+  box-sizing: border-box;
 }
 
 .splash-transition {
@@ -34,6 +36,8 @@
   opacity: 0;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  max-width: 100vw;
+  box-sizing: border-box;
 }
 
 .main-content-transition.fade-in {

@@ -23,20 +23,23 @@
 
 /* Chat List View */
 .chat-list-header {
-  padding: 20px 20px 16px 20px;
+  padding: clamp(16px, 5vw, 20px) clamp(16px, 5vw, 20px) clamp(12px, 4vw, 16px) clamp(16px, 5vw, 20px);
   border-bottom: 1px solid var(--color-border);
   background-color: var(--color-background);
   position: sticky;
   top: 0;
   z-index: 10;
+  box-sizing: border-box;
 }
 
 .chat-list-title {
   font-family: var(--font-primary);
   font-weight: 900;
-  font-size: 38px;
+  font-size: clamp(28px, 9vw, 38px);
   color: var(--color-primary);
   margin: 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .matches-list {
@@ -48,11 +51,12 @@
 .match-item {
   display: flex;
   align-items: center;
-  padding: 16px 20px;
+  padding: clamp(12px, 4vw, 16px) clamp(16px, 5vw, 20px);
   border-bottom: 1px solid var(--color-border);
   cursor: pointer;
   transition: background-color 0.2s;
-  gap: 16px;
+  gap: clamp(12px, 4vw, 16px);
+  box-sizing: border-box;
 }
 
 .match-item:hover {
@@ -69,8 +73,8 @@
 }
 
 .match-avatar {
-  width: 60px;
-  height: 60px;
+  width: clamp(52px, 15vw, 60px);
+  height: clamp(52px, 15vw, 60px);
   border-radius: 50%;
   object-fit: cover;
   flex-shrink: 0;
@@ -98,9 +102,11 @@
 .match-name {
   font-family: var(--font-primary);
   font-weight: 600;
-  font-size: 18px;
+  font-size: clamp(16px, 4.5vw, 18px);
   color: var(--color-primary);
   margin: 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .match-heart-icon {
@@ -153,7 +159,7 @@
 
 .match-last-message {
   font-family: var(--font-secondary);
-  font-size: 16px;
+  font-size: clamp(14px, 4vw, 16px);
   font-weight: 400;
   color: #555555;
   margin: 0;
@@ -180,13 +186,14 @@
 .chat-header {
   display: flex;
   align-items: center;
-  padding: 16px 20px;
+  padding: clamp(12px, 4vw, 16px) clamp(16px, 5vw, 20px);
   border-bottom: 1px solid var(--color-border);
   background-color: var(--color-background);
   position: sticky;
   top: 0;
   z-index: 10;
-  gap: 12px;
+  gap: clamp(10px, 3vw, 12px);
+  box-sizing: border-box;
 }
 
 .back-button {
@@ -230,9 +237,11 @@
 .chat-header-name {
   font-family: var(--font-primary);
   font-weight: 600;
-  font-size: 18px;
+  font-size: clamp(16px, 4.5vw, 18px);
   color: var(--color-primary);
   margin: 0 0 2px 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .chat-header-status {
@@ -256,10 +265,11 @@
   flex: 1;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  padding: 20px;
+  padding: clamp(16px, 5vw, 20px);
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: clamp(12px, 4vw, 16px);
+  box-sizing: border-box;
 }
 
 .message {
@@ -294,11 +304,12 @@
 
 .message-text {
   font-family: var(--font-secondary);
-  font-size: 16px;
+  font-size: clamp(14px, 4vw, 16px);
   font-weight: 400;
   line-height: 1.5;
   margin: 0 0 4px 0;
   word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .message--me .message-text {
@@ -328,26 +339,28 @@
 .message-input-container {
   display: flex;
   align-items: center;
-  padding: 12px 20px;
+  padding: clamp(10px, 3vw, 12px) clamp(16px, 5vw, 20px);
   border-top: 1px solid var(--color-border);
   background-color: var(--color-background);
-  gap: 12px;
+  gap: clamp(10px, 3vw, 12px);
   position: sticky;
   bottom: 0;
   z-index: 10;
+  box-sizing: border-box;
 }
 
 .message-input {
   flex: 1;
-  padding: 12px 16px;
+  padding: clamp(10px, 3vw, 12px) clamp(12px, 4vw, 16px);
   border: 1px solid var(--color-border);
   border-radius: 24px;
   font-family: var(--font-secondary);
-  font-size: 16px;
+  font-size: clamp(14px, 4vw, 16px);
   color: var(--color-text-primary);
   background-color: var(--color-background-light);
   outline: none;
   transition: border-color 0.2s, background-color 0.2s;
+  box-sizing: border-box;
 }
 
 .message-input:focus {
@@ -360,8 +373,8 @@
 }
 
 .send-button {
-  width: 44px;
-  height: 44px;
+  width: clamp(40px, 11vw, 44px);
+  height: clamp(40px, 11vw, 44px);
   border-radius: 50%;
   background-color: var(--color-primary);
   border: none;
@@ -371,6 +384,8 @@
   justify-content: center;
   transition: transform 0.2s, opacity 0.2s, background-color 0.2s;
   flex-shrink: 0;
+  min-width: 44px;
+  min-height: 44px;
 }
 
 .send-button:hover:not(:disabled) {
@@ -398,14 +413,74 @@
 }
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
+/* iPhone Plus/Max (414px) */
+@media (max-width: 414px) {
   .chat-list-title {
-    font-size: 34px;
+    font-size: clamp(26px, 8vw, 32px);
   }
   
   .match-avatar {
-    width: 56px;
-    height: 56px;
+    width: clamp(50px, 13vw, 56px);
+    height: clamp(50px, 13vw, 56px);
+  }
+  
+  .message-bubble {
+    max-width: 82%;
+  }
+}
+
+/* iPhone 14/15 (390px) */
+@media (max-width: 390px) {
+  .chat-list-title {
+    font-size: clamp(24px, 7.5vw, 30px);
+  }
+  
+  .match-avatar {
+    width: clamp(48px, 12vw, 54px);
+    height: clamp(48px, 12vw, 54px);
+  }
+  
+  .message-bubble {
+    max-width: 80%;
+  }
+}
+
+/* iPhone SE/Mini (375px) */
+@media (max-width: 375px) {
+  .chat-list-title {
+    font-size: clamp(22px, 7vw, 28px);
+  }
+  
+  .match-avatar {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .message-bubble {
+    max-width: 78%;
+    padding: clamp(10px, 3vw, 12px) clamp(12px, 4vw, 16px);
+  }
+  
+  .message-text {
+    font-size: 14px;
+  }
+  
+  .send-button {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .chat-list-title {
+    font-size: clamp(26px, 8vw, 34px);
+  }
+  
+  .match-avatar {
+    width: clamp(50px, 13vw, 56px);
+    height: clamp(50px, 13vw, 56px);
   }
   
   .message-bubble {

@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './PasswordPage.css';
 import backgroundImage from '../../uploaded_images/image1.jpg';
 import logoImage from '../../uploaded_images/logo.png';
+import { storage } from '../utils/storage';
 
 const CORRECT_PASSWORD = 'sapphapp26';
 
@@ -9,6 +10,7 @@ export default function PasswordPage({ onPasswordCorrect }) {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const timeoutRef = useRef(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,23 +23,43 @@ export default function PasswordPage({ onPasswordCorrect }) {
 
     setIsLoading(true);
 
+    // Clear any existing timeout
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+
     // Simulate a brief delay for better UX
-    setTimeout(() => {
+    timeoutRef.current = setTimeout(() => {
       if (password === CORRECT_PASSWORD) {
         // Store authentication in localStorage
-        localStorage.setItem('sapph_authenticated', 'true');
-        setIsLoading(false);
-        onPasswordCorrect();
+        const success = storage.setItem('sapph_authenticated', 'true');
+        if (success) {
+          setIsLoading(false);
+          onPasswordCorrect();
+        } else {
+          setError('Unable to save authentication. Please try again.');
+          setIsLoading(false);
+        }
       } else {
         setError('Incorrect password. Please try again.');
         setPassword('');
         setIsLoading(false);
       }
+      timeoutRef.current = null;
     }, 300);
   };
 
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
+
   const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && !isLoading) {
       handleSubmit(e);
     }
   };

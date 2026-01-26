@@ -25,22 +25,25 @@
 }
 
 .likes-header {
-  padding: 20px 20px 16px 20px;
+  padding: clamp(16px, 5vw, 20px) clamp(16px, 5vw, 20px) clamp(12px, 4vw, 16px) clamp(16px, 5vw, 20px);
   border-bottom: 1px solid var(--color-border);
   background-color: var(--color-background);
+  box-sizing: border-box;
 }
 
 .likes-title {
   font-family: var(--font-primary);
   font-weight: 900;
-  font-size: 38px;
+  font-size: clamp(28px, 9vw, 38px);
   color: var(--color-primary);
   margin: 0 0 4px 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .likes-subtitle {
   font-family: var(--font-secondary);
-  font-size: 14px;
+  font-size: clamp(12px, 3.5vw, 14px);
   color: var(--color-text-secondary);
   margin: 0;
 }
@@ -48,9 +51,10 @@
 .likes-tabs {
   display: flex;
   gap: 0;
-  padding: 0 20px;
+  padding: 0 clamp(16px, 5vw, 20px);
   border-bottom: 1px solid var(--color-border);
   background-color: var(--color-background);
+  box-sizing: border-box;
 }
 
 .likes-tab {
@@ -58,8 +62,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 16px 20px;
+  gap: clamp(6px, 2vw, 8px);
+  padding: clamp(12px, 4vw, 16px) clamp(16px, 5vw, 20px);
   background: none;
   border: none;
   border-bottom: 3px solid transparent;
@@ -67,9 +71,11 @@
   transition: all 0.2s;
   font-family: var(--font-primary);
   font-weight: 600;
-  font-size: 18px;
+  font-size: clamp(16px, 4.5vw, 18px);
   color: var(--color-text-tertiary);
   position: relative;
+  min-height: 44px;
+  box-sizing: border-box;
 }
 
 .likes-tab:hover {
@@ -100,8 +106,8 @@
 }
 
 .tab-icon {
-  width: 20px;
-  height: 20px;
+  width: clamp(18px, 5vw, 20px);
+  height: clamp(18px, 5vw, 20px);
   flex-shrink: 0;
 }
 
@@ -138,14 +144,15 @@
 }
 
 .tab-label {
-  font-size: 18px;
+  font-size: clamp(16px, 4.5vw, 18px);
 }
 
 .likes-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-  padding: 20px;
+  gap: clamp(12px, 4vw, 16px);
+  padding: clamp(16px, 5vw, 20px);
+  box-sizing: border-box;
 }
 
 .like-card {
@@ -210,15 +217,17 @@
 .like-card-name {
   font-family: var(--font-primary);
   font-weight: 700;
-  font-size: 24px;
+  font-size: clamp(20px, 6vw, 24px);
   color: var(--color-background);
   margin: 0;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .like-card-details {
   font-family: var(--font-secondary);
-  font-size: 13px;
+  font-size: clamp(11px, 3.2vw, 13px);
   color: rgba(255, 255, 255, 0.9);
   margin: 0;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
@@ -237,13 +246,14 @@
 .profile-detail-header {
   display: flex;
   align-items: center;
-  padding: 16px 20px;
+  padding: clamp(12px, 4vw, 16px) clamp(16px, 5vw, 20px);
   border-bottom: 1px solid var(--color-border);
   background-color: var(--color-background);
   position: sticky;
   top: 0;
   z-index: 10;
-  gap: 5px;
+  gap: clamp(4px, 1.5vw, 5px);
+  box-sizing: border-box;
 }
 
 .back-button {
@@ -280,9 +290,11 @@
 .profile-detail-title {
   font-family: var(--font-primary);
   font-weight: 900;
-  font-size: 28px;
+  font-size: clamp(22px, 7vw, 28px);
   color: var(--color-primary);
   margin: 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .profile-detail-content {
@@ -462,19 +474,22 @@
 
 /* Profile Content (reused from ProfilePage) */
 .profile-content {
-  padding: 0px 20px 24px 20px;
+  padding: 0px clamp(16px, 5vw, 20px) clamp(20px, 6vw, 24px) clamp(16px, 5vw, 20px);
   max-width: 600px;
   margin: 0 auto;
   margin-top: -17px;
+  box-sizing: border-box;
 }
 
 .profile-name {
   font-family: var(--font-primary);
   font-weight: 900;
-  font-size: 62px;
+  font-size: clamp(42px, 12vw, 62px);
   color: var(--color-primary);
   margin: 0 0 4px 0;
   line-height: 1.2;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 /* Swipeable Details Row */
@@ -502,13 +517,13 @@
 .details-row .detail-item {
   font-family: var(--font-secondary);
   font-weight: 400;
-  font-size: 16px;
+  font-size: clamp(14px, 4vw, 16px);
   color: #555555;
   flex-shrink: 0;
   scroll-snap-align: start;
   white-space: nowrap;
   min-width: 100%;
-  padding-right: 20px;
+  padding-right: clamp(16px, 5vw, 20px);
 }
 
 /* Profile Sections */
@@ -524,18 +539,20 @@
 .section-label {
   font-family: var(--font-primary);
   font-weight: 600;
-  font-size: 18px;
+  font-size: clamp(16px, 4.5vw, 18px);
   color: var(--color-primary);
   margin: 0 0 4px 0;
 }
 
 .section-body {
   font-family: var(--font-secondary);
-  font-size: 16px;
+  font-size: clamp(14px, 4vw, 16px);
   font-weight: 400;
   color: #555555;
   margin: 0;
   line-height: 1.4;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .section-body.looking-for-body {
@@ -544,83 +561,135 @@
 }
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
+/* iPhone Plus/Max (414px) */
+@media (max-width: 414px) {
   .likes-title {
-    font-size: 34px;
+    font-size: clamp(26px, 8vw, 32px);
   }
 
   .likes-tabs {
-    padding: 0 16px;
+    padding: 0 clamp(14px, 3.5vw, 16px);
   }
 
   .likes-tab {
-    padding: 14px 16px;
-    font-size: 17px;
+    padding: clamp(12px, 3.5vw, 14px) clamp(14px, 3.5vw, 16px);
+    font-size: clamp(15px, 4.2vw, 17px);
   }
 
   .tab-icon {
-    width: 18px;
-    height: 18px;
+    width: clamp(16px, 4.5vw, 18px);
+    height: clamp(16px, 4.5vw, 18px);
   }
 
   .tab-icon-wrapper {
-    width: 18px;
-    height: 18px;
+    width: clamp(16px, 4.5vw, 18px);
+    height: clamp(16px, 4.5vw, 18px);
   }
 
   .tab-label {
-    font-size: 17px;
+    font-size: clamp(15px, 4.2vw, 17px);
   }
   
   .likes-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    padding: 16px;
+    gap: clamp(10px, 3vw, 12px);
+    padding: clamp(14px, 4vw, 16px);
   }
   
   .like-card-name {
-    font-size: 22px;
+    font-size: clamp(18px, 5.5vw, 22px);
   }
   
   .like-card-details {
-    font-size: 12px;
+    font-size: clamp(10px, 3vw, 12px);
   }
 
   .profile-detail-title {
-    font-size: 24px;
+    font-size: clamp(20px, 6vw, 24px);
   }
 
   .profile-name {
-    font-size: 45px;
+    font-size: clamp(38px, 11vw, 45px);
   }
   
   .carousel-wrapper {
-    height: 60vh;
-    min-height: 60vh;
+    height: clamp(55vh, 60vh, 65vh);
+    min-height: clamp(55vh, 60vh, 65vh);
     aspect-ratio: 4 / 3;
-    margin-bottom: 30px;
-  }
-  
-  .image-carousel {
-    height: 100%;
-    touch-action: pan-y;
-    overscroll-behavior-y: contain;
-  }
-  
-  .carousel-image {
-    width: 100%;
-    height: 100%;
-    min-height: 100%;
-    display: block;
+    margin-bottom: clamp(24px, 7vw, 30px);
   }
   
   .profile-content {
-    padding: 0px 16px 20px 16px;
-    margin-top: -17px;
+    padding: 0px clamp(14px, 4vw, 16px) clamp(18px, 5vw, 20px) clamp(14px, 4vw, 16px);
   }
 }
 
-@media (max-width: 480px) {
+/* iPhone 14/15 (390px) */
+@media (max-width: 390px) {
+  .likes-title {
+    font-size: clamp(24px, 7.5vw, 30px);
+  }
+
+  .likes-tabs {
+    padding: 0 clamp(12px, 3vw, 14px);
+  }
+
+  .likes-tab {
+    padding: clamp(11px, 3vw, 13px) clamp(12px, 3vw, 14px);
+    font-size: clamp(14px, 4vw, 16px);
+    gap: clamp(5px, 1.5vw, 6px);
+  }
+
+  .tab-icon {
+    width: clamp(15px, 4vw, 17px);
+    height: clamp(15px, 4vw, 17px);
+  }
+
+  .tab-icon-wrapper {
+    width: clamp(15px, 4vw, 17px);
+    height: clamp(15px, 4vw, 17px);
+  }
+
+  .tab-label {
+    font-size: clamp(14px, 4vw, 16px);
+  }
+  
+  .likes-grid {
+    gap: 10px;
+    padding: clamp(12px, 3.5vw, 14px);
+  }
+  
+  .like-card-name {
+    font-size: clamp(17px, 5vw, 20px);
+  }
+  
+  .like-card-details {
+    font-size: clamp(10px, 2.8vw, 11px);
+  }
+
+  .profile-detail-title {
+    font-size: clamp(18px, 5.5vw, 22px);
+  }
+
+  .profile-name {
+    font-size: clamp(36px, 10vw, 42px);
+  }
+  
+  .carousel-wrapper {
+    height: clamp(52vh, 58vh, 62vh);
+    min-height: clamp(52vh, 58vh, 62vh);
+  }
+  
+  .profile-content {
+    padding: 0px 12px 16px 12px;
+  }
+}
+
+/* iPhone SE/Mini (375px) */
+@media (max-width: 375px) {
+  .likes-title {
+    font-size: clamp(22px, 7vw, 28px);
+  }
+
   .likes-tabs {
     padding: 0 12px;
   }
@@ -647,11 +716,121 @@
 
   .likes-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    padding: 16px;
+    gap: 10px;
+    padding: 12px;
   }
   
   .like-card {
     aspect-ratio: 3 / 4;
+  }
+  
+  .like-card-name {
+    font-size: clamp(16px, 4.5vw, 18px);
+  }
+  
+  .like-card-details {
+    font-size: 10px;
+  }
+
+  .profile-detail-title {
+    font-size: clamp(18px, 5vw, 20px);
+  }
+
+  .profile-name {
+    font-size: clamp(34px, 9.5vw, 40px);
+  }
+  
+  .carousel-wrapper {
+    height: clamp(50vh, 56vh, 60vh);
+    min-height: clamp(50vh, 56vh, 60vh);
+    margin-bottom: 20px;
+  }
+  
+  .profile-content {
+    padding: 0px 12px 14px 12px;
+  }
+  
+  .section-label {
+    font-size: 16px;
+  }
+  
+  .section-body {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .likes-title {
+    font-size: clamp(26px, 8vw, 34px);
+  }
+
+  .likes-tabs {
+    padding: 0 clamp(14px, 4vw, 16px);
+  }
+
+  .likes-tab {
+    padding: clamp(12px, 3.5vw, 14px) clamp(14px, 4vw, 16px);
+    font-size: clamp(15px, 4.2vw, 17px);
+  }
+
+  .tab-icon {
+    width: clamp(16px, 4.5vw, 18px);
+    height: clamp(16px, 4.5vw, 18px);
+  }
+
+  .tab-icon-wrapper {
+    width: clamp(16px, 4.5vw, 18px);
+    height: clamp(16px, 4.5vw, 18px);
+  }
+
+  .tab-label {
+    font-size: clamp(15px, 4.2vw, 17px);
+  }
+  
+  .likes-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(10px, 3vw, 12px);
+    padding: clamp(14px, 4vw, 16px);
+  }
+  
+  .like-card-name {
+    font-size: clamp(18px, 5.5vw, 22px);
+  }
+  
+  .like-card-details {
+    font-size: clamp(10px, 3vw, 12px);
+  }
+
+  .profile-detail-title {
+    font-size: clamp(20px, 6vw, 24px);
+  }
+
+  .profile-name {
+    font-size: clamp(38px, 11vw, 45px);
+  }
+  
+  .carousel-wrapper {
+    height: clamp(55vh, 60vh, 65vh);
+    min-height: clamp(55vh, 60vh, 65vh);
+    aspect-ratio: 4 / 3;
+    margin-bottom: clamp(24px, 7vw, 30px);
+  }
+  
+  .image-carousel {
+    height: 100%;
+    touch-action: pan-y;
+    overscroll-behavior-y: contain;
+  }
+  
+  .carousel-image {
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    display: block;
+  }
+  
+  .profile-content {
+    padding: 0px clamp(14px, 4vw, 16px) clamp(18px, 5vw, 20px) clamp(14px, 4vw, 16px);
+    margin-top: -17px;
   }
 }

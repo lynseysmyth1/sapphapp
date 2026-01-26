@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import './LikesPage.css';
 import { likedProfiles } from '../data/profiles';
 import { BackArrowIcon, HeartIcon, WavingHandIcon } from './shared/Icons';
@@ -35,18 +35,22 @@ export default function LikesPage() {
   };
 
   // Carousel swipe handlers
-  const carouselSwipe = useVerticalSwipe((newIndex) => {
+  const handleCarouselSwipe = useCallback((newIndex) => {
     if (selectedProfile) {
       setCurrentImageIndex(Math.max(0, Math.min(newIndex, selectedProfile.images.length - 1)));
     }
-  });
+  }, [selectedProfile]);
+
+  const carouselSwipe = useVerticalSwipe(handleCarouselSwipe);
 
   // Details swipe handlers
-  const detailSwipe = useHorizontalSwipe((newIndex) => {
+  const handleDetailSwipe = useCallback((newIndex) => {
     if (selectedProfile) {
       setCurrentDetailIndex(Math.max(0, Math.min(newIndex, selectedProfile.details.length - 1)));
     }
-  });
+  }, [selectedProfile]);
+
+  const detailSwipe = useHorizontalSwipe(handleDetailSwipe);
 
   // Update carousel position when index changes
   useEffect(() => {
@@ -73,6 +77,8 @@ export default function LikesPage() {
     const handleScroll = () => {
       const scrollTop = carousel.scrollTop;
       const imageHeight = carousel.offsetHeight;
+      if (imageHeight === 0) return; // Prevent division by zero
+
       const newIndex = Math.round(scrollTop / imageHeight);
       const clampedIndex = Math.max(0, Math.min(newIndex, selectedProfile.images.length - 1));
       if (clampedIndex !== currentImageIndex) {
@@ -80,15 +86,20 @@ export default function LikesPage() {
       }
     };
 
-    carousel.addEventListener('scroll', handleScroll);
-    return () => carousel.removeEventListener('scroll', handleScroll);
+    carousel.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      carousel.removeEventListener('scroll', handleScroll);
+    };
   }, [currentImageIndex, selectedProfile, carouselSwipe.containerRef]);
 
   // Update details position when index changes
   useEffect(() => {
-    if (detailSwipe.containerRef.current && selectedProfile) {
-      const itemWidth = detailSwipe.containerRef.current.scrollWidth / selectedProfile.details.length;
-      detailSwipe.containerRef.current.scrollTo({
+    const container = detailSwipe.containerRef.current;
+    if (!container || !selectedProfile || selectedProfile.details.length === 0) return;
+
+    const itemWidth = container.scrollWidth / selectedProfile.details.length;
+    if (itemWidth > 0) {
+      container.scrollTo({
         left: currentDetailIndex * itemWidth,
         behavior: 'smooth'
       });
@@ -96,18 +107,22 @@ export default function LikesPage() {
   }, [currentDetailIndex, selectedProfile, detailSwipe.containerRef]);
 
   // Reset scroll position when profile changes
+  const mainContentRef = useRef(null);
+  
   useEffect(() => {
     if (selectedProfile) {
-      const mainContent = document.querySelector('.main-content-transition');
-      if (mainContent) {
-        mainContent.scrollTo({
+      // Use requestAnimationFrame for smoother scroll reset
+      requestAnimationFrame(() => {
+        if (mainContentRef.current) {
+          mainContentRef.current.scrollTo({
+            top: 0,
+            behavior: 'instant'
+          });
+        }
+        window.scrollTo({
           top: 0,
           behavior: 'instant'
         });
-      }
-      window.scrollTo({
-        top: 0,
-        behavior: 'instant'
       });
     }
   }, [selectedProfile]);
@@ -127,7 +142,7 @@ export default function LikesPage() {
           <h1 className="profile-detail-title">Back</h1>
         </div>
 
-        <div className="profile-detail-content">
+        <div className="profile-detail-content" ref={mainContentRef}>
           {/* Image Carousel */}
           <div className="carousel-wrapper">
             <div 
@@ -164,14 +179,18 @@ export default function LikesPage() {
             <div className="action-buttons">
               <button 
                 className="action-button dislike-button" 
-                onClick={() => console.log(`Profile ${selectedProfile.name} disliked`)}
+                onClick={() => {
+                  // TODO: Implement dislike functionality with backend
+                }}
                 aria-label={`Dislike ${selectedProfile.name}`}
               >
                 <span className="button-icon" aria-hidden="true">×</span>
               </button>
               <button 
                 className="action-button like-button" 
-                onClick={() => console.log(`Profile ${selectedProfile.name} liked`)}
+                onClick={() => {
+                  // TODO: Implement like functionality with backend
+                }}
                 aria-label={`Like ${selectedProfile.name}`}
               >
                 <HeartIcon className="button-icon heart-icon" />
@@ -226,8 +245,14 @@ export default function LikesPage() {
   }
 
   // Get current profiles based on active tab
-  const currentProfiles = activeTab === 'likes' ? filteredLikedProfiles : friendsProfiles;
-  const dateLabel = activeTab === 'likes' ? 'Matched' : 'Friends since';
+  const currentProfiles = useMemo(() => 
+    activeTab === 'likes' ? filteredLikedProfiles : friendsProfiles,
+    [activeTab]
+  );
+  const dateLabel = useMemo(() => 
+    activeTab === 'likes' ? 'Matched' : 'Friends since',
+    [activeTab]
+  );
 
   // Show likes/friends list view
   return (

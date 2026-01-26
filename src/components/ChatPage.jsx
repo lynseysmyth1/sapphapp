@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import './ChatPage.css';
 import { matches } from '../data/matches';
 import { BackArrowIcon, SendIcon, HeartIcon, WavingHandIcon } from './shared/Icons';
@@ -7,14 +7,14 @@ export default function ChatPage() {
   const [selectedMatch, setSelectedMatch] = useState(null);
   const [messageInput, setMessageInput] = useState('');
 
-  const handleSendMessage = (e) => {
+  const handleSendMessage = useCallback((e) => {
     e.preventDefault();
-    if (messageInput.trim()) {
-      // In a real app, this would send the message to a backend
-      console.log('Sending message:', messageInput);
+    const trimmedMessage = messageInput.trim();
+    if (trimmedMessage) {
+      // TODO: Implement message sending with backend
       setMessageInput('');
     }
-  };
+  }, [messageInput]);
 
   if (selectedMatch) {
     return (

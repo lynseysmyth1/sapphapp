@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import './ProfilePage.css';
 import { profiles } from '../data/profiles';
 import { HeartIcon, WavingHandIcon } from './shared/Icons';
@@ -9,39 +9,47 @@ export default function ProfilePage() {
   const [profileImageIndices, setProfileImageIndices] = useState({});
   const [currentDetailIndex, setCurrentDetailIndex] = useState(0);
 
-  const currentProfile = profiles[currentProfileIndex];
-  const images = currentProfile.images;
-  const details = currentProfile.details;
+  const currentProfile = useMemo(() => profiles[currentProfileIndex], [currentProfileIndex]);
+  const images = useMemo(() => currentProfile.images, [currentProfile]);
+  const details = useMemo(() => currentProfile.details, [currentProfile]);
   const currentImageIndex = profileImageIndices[currentProfileIndex] || 0;
 
   // Profile swipe handlers
-  const profileSwipe = useHorizontalSwipe((newIndex) => {
+  const handleProfileSwipe = useCallback((newIndex) => {
     const clampedIndex = Math.max(0, Math.min(newIndex, profiles.length - 1));
     setCurrentProfileIndex(clampedIndex);
-  });
+  }, []);
+
+  const profileSwipe = useHorizontalSwipe(handleProfileSwipe);
 
   // Carousel swipe handlers
-  const carouselSwipe = useVerticalSwipe((newIndex) => {
+  const handleCarouselSwipe = useCallback((newIndex) => {
     const clampedIndex = Math.max(0, Math.min(newIndex, images.length - 1));
     setProfileImageIndices(prev => ({
       ...prev,
       [currentProfileIndex]: clampedIndex
     }));
-  });
+  }, [currentProfileIndex, images.length]);
+
+  const carouselSwipe = useVerticalSwipe(handleCarouselSwipe);
 
   // Details swipe handlers
-  const detailSwipe = useHorizontalSwipe((newIndex) => {
+  const handleDetailSwipe = useCallback((newIndex) => {
     setCurrentDetailIndex(Math.max(0, Math.min(newIndex, details.length - 1)));
-  });
+  }, [details.length]);
+
+  const detailSwipe = useHorizontalSwipe(handleDetailSwipe);
 
   // Update profile position when index changes
   useEffect(() => {
-    if (profileSwipe.containerRef.current) {
-      profileSwipe.containerRef.current.scrollTo({
-        left: currentProfileIndex * profileSwipe.containerRef.current.offsetWidth,
-        behavior: 'smooth'
-      });
-    }
+    const container = profileSwipe.containerRef.current;
+    if (!container) return;
+
+    container.scrollTo({
+      left: currentProfileIndex * container.offsetWidth,
+      behavior: 'smooth'
+    });
+
     // Reset image index for new profile if not already set
     if (!profileImageIndices[currentProfileIndex] && currentProfileIndex !== 0) {
       setProfileImageIndices(prev => ({
@@ -49,7 +57,7 @@ export default function ProfilePage() {
         [currentProfileIndex]: 0
       }));
     }
-  }, [currentProfileIndex, profileSwipe.containerRef]);
+  }, [currentProfileIndex, profileImageIndices, profileSwipe.containerRef]);
 
   // Update carousel position when profile or image index changes
   useEffect(() => {
@@ -77,9 +85,12 @@ export default function ProfilePage() {
     const handleScroll = () => {
       const scrollTop = carousel.scrollTop;
       const imageHeight = carousel.offsetHeight;
+      if (imageHeight === 0) return; // Prevent division by zero
+
       const newIndex = Math.round(scrollTop / imageHeight);
       const clampedIndex = Math.max(0, Math.min(newIndex, images.length - 1));
       const currentIndexForProfile = profileImageIndices[currentProfileIndex] || 0;
+      
       if (clampedIndex !== currentIndexForProfile) {
         setProfileImageIndices(prev => ({
           ...prev,
@@ -88,15 +99,20 @@ export default function ProfilePage() {
       }
     };
 
-    carousel.addEventListener('scroll', handleScroll);
-    return () => carousel.removeEventListener('scroll', handleScroll);
+    carousel.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      carousel.removeEventListener('scroll', handleScroll);
+    };
   }, [profileImageIndices, images.length, currentProfileIndex, carouselSwipe.containerRef]);
 
   // Update details position when index changes
   useEffect(() => {
-    if (detailSwipe.containerRef.current) {
-      const itemWidth = detailSwipe.containerRef.current.scrollWidth / details.length;
-      detailSwipe.containerRef.current.scrollTo({
+    const container = detailSwipe.containerRef.current;
+    if (!container || details.length === 0) return;
+
+    const itemWidth = container.scrollWidth / details.length;
+    if (itemWidth > 0) {
+      container.scrollTo({
         left: currentDetailIndex * itemWidth,
         behavior: 'smooth'
       });
@@ -104,24 +120,24 @@ export default function ProfilePage() {
   }, [currentDetailIndex, details.length, detailSwipe.containerRef]);
 
   // Like/Dislike handlers
-  const handleLike = () => {
-    console.log(`Profile ${currentProfile.name} liked`);
+  const handleLike = useCallback(() => {
+    // TODO: Implement like functionality with backend
     if (currentProfileIndex < profiles.length - 1) {
       setCurrentProfileIndex(currentProfileIndex + 1);
     }
-  };
+  }, [currentProfileIndex]);
 
-  const handleDislike = () => {
-    console.log(`Profile ${currentProfile.name} disliked`);
+  const handleDislike = useCallback(() => {
+    // TODO: Implement dislike functionality with backend
     if (currentProfileIndex < profiles.length - 1) {
       setCurrentProfileIndex(currentProfileIndex + 1);
     }
-  };
+  }, [currentProfileIndex]);
 
-  const handleWave = () => {
-    console.log(`Waved at ${currentProfile.name}`);
+  const handleWave = useCallback(() => {
+    // TODO: Implement wave functionality with backend
     // Wave action - could open chat or send a wave notification
-  };
+  }, []);
 
 
   return (

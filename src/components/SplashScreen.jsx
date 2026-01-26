@@ -1,26 +1,37 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './SplashScreen.css';
 import backgroundImage from '../../uploaded_images/image1.jpg';
 import logoImage from '../../LOGOS FOR SAPPH /White logo.png';
 
-const APP_VERSION = '1.0.77';
-const LAST_CHANGE = 'Update mobile profile layout: full-bl...';
+const APP_VERSION = '1.0.79';
+const LAST_CHANGE = 'Update mobile profile layout and styl...';
 
 export default function SplashScreen({ onSignIn }) {
   const [backgroundLoaded, setBackgroundLoaded] = useState(false);
   const [logoLoaded, setLogoLoaded] = useState(false);
   const [logoOpacity, setLogoOpacity] = useState(0);
   const [contentOpacity, setContentOpacity] = useState(0);
+  const buttonTimerRef = useRef(null);
 
   useEffect(() => {
     if (backgroundLoaded && logoLoaded) {
       setLogoOpacity(1);
       
-      const buttonTimer = setTimeout(() => {
+      // Clear any existing timer
+      if (buttonTimerRef.current) {
+        clearTimeout(buttonTimerRef.current);
+      }
+      
+      buttonTimerRef.current = setTimeout(() => {
         setContentOpacity(1);
+        buttonTimerRef.current = null;
       }, 1000);
 
-      return () => clearTimeout(buttonTimer);
+      return () => {
+        if (buttonTimerRef.current) {
+          clearTimeout(buttonTimerRef.current);
+        }
+      };
     }
   }, [backgroundLoaded, logoLoaded]);
 

@@ -20,10 +20,12 @@
   align-items: center;
   background-color: var(--color-background);
   border-top: 1px solid var(--color-border);
-  padding: 8px 0;
+  padding: clamp(6px, 2vw, 8px) 0;
   z-index: 9999;
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
   pointer-events: auto;
+  box-sizing: border-box;
+  min-height: 60px;
 }
 
 .nav-item {
@@ -34,11 +36,14 @@
   background: none;
   border: none;
   cursor: pointer;
-  padding: 6px 16px;
+  padding: clamp(4px, 1.5vw, 6px) clamp(12px, 4vw, 16px);
   transition: opacity 0.2s;
   pointer-events: auto;
   z-index: 10000;
   position: relative;
+  min-width: 44px;
+  min-height: 44px;
+  box-sizing: border-box;
 }
 
 .nav-item:hover {
@@ -56,19 +61,19 @@
 }
 
 .nav-icon {
-  width: 26px;
-  height: 26px;
-  margin-bottom: 2px;
+  width: clamp(22px, 6.5vw, 26px);
+  height: clamp(22px, 6.5vw, 26px);
+  margin-bottom: clamp(1px, 0.5vw, 2px);
 }
 
 .nav-icon.heart-icon {
-  width: 26px;
-  height: 26px;
+  width: clamp(22px, 6.5vw, 26px);
+  height: clamp(22px, 6.5vw, 26px);
 }
 
 .nav-label {
   font-family: var(--font-secondary);
-  font-size: 12px;
+  font-size: clamp(10px, 3vw, 12px);
   color: var(--color-primary);
   font-weight: 400;
   transition: all 0.2s;
@@ -88,21 +93,125 @@
 }
 
 /* Mobile adjustments */
-@media (max-width: 768px) {
+/* iPhone Plus/Max (414px) */
+@media (max-width: 414px) {
+  .bottom-navigation {
+    padding: clamp(4px, 1.5vw, 6px) 0;
+    min-height: 58px;
+  }
+  
+  .nav-item {
+    padding: clamp(4px, 1.5vw, 5px) clamp(10px, 3vw, 12px);
+  }
+  
+  .nav-icon {
+    width: clamp(22px, 6vw, 24px);
+    height: clamp(22px, 6vw, 24px);
+    margin-bottom: 1px;
+  }
+  
+  .nav-icon.heart-icon {
+    width: clamp(22px, 6vw, 24px);
+    height: clamp(22px, 6vw, 24px);
+  }
+  
+  .nav-label {
+    font-size: clamp(10px, 2.8vw, 11px);
+  }
+  
+  .profile-page {
+    padding-bottom: clamp(52px, 14vh, 55px);
+  }
+}
+
+/* iPhone 14/15 (390px) */
+@media (max-width: 390px) {
+  .bottom-navigation {
+    padding: clamp(4px, 1.2vw, 5px) 0;
+    min-height: 56px;
+  }
+  
+  .nav-item {
+    padding: clamp(3px, 1.2vw, 4px) clamp(9px, 2.5vw, 11px);
+  }
+  
+  .nav-icon {
+    width: clamp(20px, 5.5vw, 22px);
+    height: clamp(20px, 5.5vw, 22px);
+    margin-bottom: 1px;
+  }
+  
+  .nav-icon.heart-icon {
+    width: clamp(20px, 5.5vw, 22px);
+    height: clamp(20px, 5.5vw, 22px);
+  }
+  
+  .nav-label {
+    font-size: clamp(9px, 2.5vw, 10px);
+  }
+  
+  .profile-page {
+    padding-bottom: clamp(50px, 13vh, 53px);
+  }
+}
+
+/* iPhone SE/Mini (375px) */
+@media (max-width: 375px) {
   .bottom-navigation {
     padding: 4px 0;
-  }  .nav-item {
-    padding: 4px 12px;
-  }  .nav-icon {
-    width: 24px;
-    height: 24px;
+    min-height: 54px;
+  }
+  
+  .nav-item {
+    padding: 3px 10px;
+  }
+  
+  .nav-icon {
+    width: 20px;
+    height: 20px;
     margin-bottom: 1px;
-  }  .nav-icon.heart-icon {
-    width: 24px;
-    height: 24px;
-  }  .nav-label {
-    font-size: 11px;
-  }  .profile-page {
-    padding-bottom: 55px;
+  }
+  
+  .nav-icon.heart-icon {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .nav-label {
+    font-size: 9px;
+  }
+  
+  .profile-page {
+    padding-bottom: 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .bottom-navigation {
+    padding: clamp(4px, 1.5vw, 6px) 0;
+    min-height: clamp(54px, 15vw, 58px);
+  }
+  
+  .nav-item {
+    padding: clamp(3px, 1.2vw, 4px) clamp(9px, 3vw, 12px);
+  }
+  
+  .nav-icon {
+    width: clamp(20px, 6vw, 24px);
+    height: clamp(20px, 6vw, 24px);
+    margin-bottom: 1px;
+  }
+  
+  .nav-icon.heart-icon {
+    width: clamp(20px, 6vw, 24px);
+    height: clamp(20px, 6vw, 24px);
+  }
+  
+  .nav-label {
+    font-size: clamp(9px, 2.8vw, 11px);
+  }
+  
+  .profile-page {
+    padding-bottom: clamp(50px, 14vh, 55px);
   }
 }

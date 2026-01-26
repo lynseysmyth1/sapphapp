@@ -72,9 +72,11 @@
 }
 
 .logo-image {
-  max-width: 1150px;
+  max-width: min(1150px, 90vw);
   width: 100%;
   height: auto;
+  padding: 0 clamp(20px, 5vw, 40px);
+  box-sizing: border-box;
 }
 
 .splash-buttons {
@@ -86,10 +88,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: clamp(0.75rem, 2.5vw, 1rem);
   width: 100%;
-  max-width: 280px;
-  padding: 2rem;
+  max-width: min(280px, 85vw);
+  padding: clamp(1.5rem, 5vw, 2rem);
   margin: 0 auto;
   box-sizing: border-box;
 }
@@ -97,14 +99,16 @@
 .btn-primary,
 .btn-secondary {
   width: 100%;
-  padding: 1rem 2rem;
-  font-size: 1rem;
+  padding: clamp(0.875rem, 2.5vw, 1rem) clamp(1.5rem, 5vw, 2rem);
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
   font-weight: 600;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
   font-family: var(--font-primary);
+  min-height: 44px;
+  box-sizing: border-box;
 }
 
 .btn-primary {
@@ -153,25 +157,92 @@
   text-decoration: underline;
 }
 
-@media (max-width: 768px) {
+/* iPhone Plus/Max (414px) */
+@media (max-width: 414px) {
   .splash-buttons {
     bottom: auto;
-    top: 65%;
-    padding: 1.5rem;
+    top: clamp(60%, 65%, 70%);
+    padding: clamp(1.25rem, 4vw, 1.5rem);
   }
 
   .logo-container {
-    top: 35%;
+    top: clamp(30%, 35%, 40%);
   }
 
   .logo-image {
-    max-width: 725px;
+    max-width: min(725px, 85vw);
   }
 
   .btn-primary,
   .btn-secondary {
-    padding: 0.875rem 1.5rem;
-    font-size: 0.95rem;
+    padding: clamp(0.8rem, 2.2vw, 0.875rem) clamp(1.25rem, 3.5vw, 1.5rem);
+    font-size: clamp(0.85rem, 2.3vw, 0.95rem);
+  }
+}
+
+/* iPhone 14/15 (390px) */
+@media (max-width: 390px) {
+  .splash-buttons {
+    top: clamp(58%, 63%, 68%);
+    padding: clamp(1.1rem, 3.5vw, 1.3rem);
+  }
+
+  .logo-container {
+    top: clamp(28%, 33%, 38%);
+  }
+
+  .logo-image {
+    max-width: min(680px, 82vw);
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    padding: clamp(0.75rem, 2vw, 0.85rem) clamp(1.1rem, 3vw, 1.3rem);
+    font-size: clamp(0.8rem, 2.2vw, 0.9rem);
+  }
+}
+
+/* iPhone SE/Mini (375px) */
+@media (max-width: 375px) {
+  .splash-buttons {
+    top: clamp(56%, 61%, 66%);
+    padding: 1rem;
+  }
+
+  .logo-container {
+    top: clamp(26%, 31%, 36%);
+  }
+
+  .logo-image {
+    max-width: min(650px, 80vw);
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    padding: 0.75rem 1.1rem;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .splash-buttons {
+    bottom: auto;
+    top: clamp(60%, 65%, 70%);
+    padding: clamp(1.25rem, 4vw, 1.5rem);
+  }
+
+  .logo-container {
+    top: clamp(30%, 35%, 40%);
+  }
+
+  .logo-image {
+    max-width: min(725px, 85vw);
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    padding: clamp(0.8rem, 2.2vw, 0.875rem) clamp(1.25rem, 3.5vw, 1.5rem);
+    font-size: clamp(0.85rem, 2.3vw, 0.95rem);
   }
 }
 

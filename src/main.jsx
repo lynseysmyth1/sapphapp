@@ -7,14 +7,13 @@ import './index.css'
 const rootElement = document.getElementById('root');
 
 if (!rootElement) {
-  console.error('Root element not found!');
-} else {
-  console.log('Root element found, rendering App...');
-  ReactDOM.createRoot(rootElement).render(
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>,
-  );
-  console.log('App rendered successfully');
+  // This should never happen in a properly configured app
+  throw new Error('Root element not found! Please ensure index.html contains a div with id="root"');
 }
+
+ReactDOM.createRoot(rootElement).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
 
