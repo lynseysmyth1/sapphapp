@@ -10,25 +10,33 @@ export default function ProfilePage() {
   const [currentDetailIndex, setCurrentDetailIndex] = useState(0);
   const profilePageRef = useRef(null);
 
-  // Reset scroll position on mount
+  // Reset scroll position on mount and when profile changes
   useEffect(() => {
+    // Use multiple RAFs to ensure DOM is ready
     requestAnimationFrame(() => {
-      if (profilePageRef.current) {
-        profilePageRef.current.scrollTo({
+      requestAnimationFrame(() => {
+        // Reset main scroll container
+        const mainContent = document.querySelector('.main-content-scrollable');
+        if (mainContent) {
+          mainContent.scrollTop = 0;
+        }
+        
+        // Reset all profile pages
+        const profilePages = document.querySelectorAll('.profile-page');
+        profilePages.forEach(page => {
+          if (page) {
+            page.scrollTop = 0;
+          }
+        });
+        
+        // Reset window scroll
+        window.scrollTo({
           top: 0,
           behavior: 'instant'
         });
-      }
-      // Also reset any parent scroll containers
-      const mainContent = document.querySelector('.main-content-scrollable');
-      if (mainContent) {
-        mainContent.scrollTo({
-          top: 0,
-          behavior: 'instant'
-        });
-      }
+      });
     });
-  }, []);
+  }, [currentProfileIndex]);
 
   const currentProfile = useMemo(() => profiles[currentProfileIndex], [currentProfileIndex]);
   const images = useMemo(() => currentProfile.images, [currentProfile]);
@@ -93,6 +101,19 @@ export default function ProfilePage() {
           });
         }
       }
+      
+      // Reset vertical scroll position of current profile page
+      requestAnimationFrame(() => {
+        const profilePages = document.querySelectorAll('.profile-page');
+        if (profilePages[currentProfileIndex]) {
+          profilePages[currentProfileIndex].scrollTop = 0;
+        }
+        // Also reset main scroll container
+        const mainContent = document.querySelector('.main-content-scrollable');
+        if (mainContent) {
+          mainContent.scrollTop = 0;
+        }
+      });
     }, 50);
 
     // Reset image index for new profile if not already set

@@ -22,18 +22,28 @@ function App() {
     const authenticated = storage.getItem('sapph_authenticated') === 'true';
     setIsAuthenticated(authenticated);
     
-    // Reset scroll position on mount
+    // Reset scroll position on mount - use double RAF for reliability
     requestAnimationFrame(() => {
-      const mainContent = document.querySelector('.main-content-transition');
-      if (mainContent) {
-        mainContent.scrollTo({
+      requestAnimationFrame(() => {
+        // Reset main scroll container
+        const mainContent = document.querySelector('.main-content-scrollable');
+        if (mainContent) {
+          mainContent.scrollTop = 0;
+        }
+        
+        // Reset all profile pages
+        const profilePages = document.querySelectorAll('.profile-page');
+        profilePages.forEach(page => {
+          if (page) {
+            page.scrollTop = 0;
+          }
+        });
+        
+        // Reset window scroll
+        window.scrollTo({
           top: 0,
           behavior: 'instant'
         });
-      }
-      window.scrollTo({
-        top: 0,
-        behavior: 'instant'
       });
     });
   }, []);
@@ -75,18 +85,28 @@ function App() {
     }
     setCurrentView(view);
     
-    // Reset scroll position when navigating
+    // Reset scroll position when navigating - use double RAF for reliability
     requestAnimationFrame(() => {
-      const mainContent = document.querySelector('.main-content-transition');
-      if (mainContent) {
-        mainContent.scrollTo({
+      requestAnimationFrame(() => {
+        // Reset main scroll container
+        const mainContent = document.querySelector('.main-content-scrollable');
+        if (mainContent) {
+          mainContent.scrollTop = 0;
+        }
+        
+        // Reset all profile pages
+        const profilePages = document.querySelectorAll('.profile-page');
+        profilePages.forEach(page => {
+          if (page) {
+            page.scrollTop = 0;
+          }
+        });
+        
+        // Reset window scroll
+        window.scrollTo({
           top: 0,
           behavior: 'instant'
         });
-      }
-      window.scrollTo({
-        top: 0,
-        behavior: 'instant'
       });
     });
   }, [currentView]);
