@@ -63,9 +63,9 @@
 
 .logo-container {
   position: absolute;
-  top: 40%;
+  bottom: clamp(144px, 25vh, 200px);
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, 0);
   z-index: 10;
   display: flex;
   justify-content: center;
@@ -167,8 +167,8 @@
   }
 
   .logo-container {
-    top: clamp(35%, 40%, 45%);
-    transform: translate(-50%, -50%);
+    bottom: clamp(280px, 75vh, 320px);
+    transform: translate(-50%, 0);
   }
 
   .logo-image {
@@ -192,8 +192,8 @@
   }
 
   .logo-container {
-    top: clamp(33%, 38%, 43%);
-    transform: translate(-50%, -50%);
+    bottom: clamp(270px, 78vh, 310px);
+    transform: translate(-50%, 0);
   }
 
   .logo-image {
@@ -217,8 +217,8 @@
   }
 
   .logo-container {
-    top: clamp(32%, 37%, 42%);
-    transform: translate(-50%, -50%);
+    bottom: clamp(260px, 80vh, 300px);
+    transform: translate(-50%, 0);
   }
 
   .logo-image {
@@ -242,8 +242,8 @@
   }
 
   .logo-container {
-    top: clamp(35%, 40%, 45%);
-    transform: translate(-50%, -50%);
+    bottom: clamp(280px, 75vh, 320px);
+    transform: translate(-50%, 0);
   }
 
   .logo-image {
