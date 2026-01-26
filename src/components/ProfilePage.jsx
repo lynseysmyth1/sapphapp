@@ -15,10 +15,11 @@ export default function ProfilePage() {
     // Use multiple RAFs to ensure DOM is ready
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        // Reset all profile pages (vertical scroll)
+        // Reset all profile pages (vertical scroll) - but NOT carousels
         const profilePages = document.querySelectorAll('.profile-page');
         profilePages.forEach(page => {
           if (page) {
+            // Only reset the profile page scroll, not carousel scrolls
             page.scrollTop = 0;
           }
         });
@@ -96,10 +97,11 @@ export default function ProfilePage() {
         }
       }
       
-      // Reset vertical scroll position of current profile page
+      // Reset vertical scroll position of current profile page (but not carousel)
       requestAnimationFrame(() => {
         const profilePages = document.querySelectorAll('.profile-page');
         if (profilePages[currentProfileIndex]) {
+          // Only reset profile page scroll, preserve carousel scroll position
           profilePages[currentProfileIndex].scrollTop = 0;
         }
       });
