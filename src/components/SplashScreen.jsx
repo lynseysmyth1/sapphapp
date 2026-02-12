@@ -3,8 +3,8 @@ import './SplashScreen.css';
 import backgroundImage from '../../uploaded_images/image1.jpg';
 import logoImage from '../../LOGOS FOR SAPPH /White logo.png';
 
-const APP_VERSION = '1.0.111';
-const LAST_CHANGE = 'feat: add orange box favicon with S';
+const APP_VERSION = '1.0.113';
+const LAST_CHANGE = 'fix: ensure bottom navigation shows o...';
 
 export default function SplashScreen({ onSignIn }) {
   const [backgroundLoaded, setBackgroundLoaded] = useState(false);
