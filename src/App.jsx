@@ -124,8 +124,12 @@ function App() {
               {currentView === 'chat' && <ChatPage />}
             </ErrorBoundary>
           </div>
-          <BottomNavigation currentView={currentView} onNavigate={handleNavigate} />
         </div>
+        {(!showSplash || isTransitioning) && (
+          <div className="bottom-navigation-wrapper">
+            <BottomNavigation currentView={currentView} onNavigate={handleNavigate} />
+          </div>
+        )}
       </div>
     </>
   );

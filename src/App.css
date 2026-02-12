@@ -54,6 +54,20 @@
   opacity: 1;
 }
 
+/* Keep bottom nav outside transition so it's always visible on mobile (not clipped by opacity/stacking) */
+.bottom-navigation-wrapper {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.bottom-navigation-wrapper > * {
+  pointer-events: auto;
+}
+
 .app-container {
   width: 100%;
   height: 100vh;
