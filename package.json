@@ -1,6 +1,6 @@
 {
   "name": "sapph-dating-app",
-  "version": "1.0.113",
+  "version": "1.0.115",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -9,6 +9,7 @@
     "version:increment": "node scripts/increment-version.js"
   },
   "dependencies": {
+    "firebase": "^12.9.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "swiper": "^11.2.10"
@@ -17,6 +18,7 @@
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
     "@vitejs/plugin-react": "^4.2.1",
+    "sharp": "^0.34.5",
     "vite": "^5.0.8"
   }
 }

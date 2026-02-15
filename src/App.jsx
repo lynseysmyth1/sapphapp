@@ -11,6 +11,7 @@ import './App.css';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [showEmailSignIn, setShowEmailSignIn] = useState(false);
   const [showSplash, setShowSplash] = useState(true);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [currentView, setCurrentView] = useState('home');
@@ -46,21 +47,27 @@ function App() {
     setIsAuthenticated(true);
   }, []);
 
-  const handleSignIn = useCallback(() => {
+  const transitionToApp = useCallback(() => {
     setIsTransitioning(true);
     setCurrentView('home');
-    
-    // Clear any existing timeout
     if (transitionTimeoutRef.current) {
       clearTimeout(transitionTimeoutRef.current);
     }
-    
-    // After transition completes, hide splash screen
     transitionTimeoutRef.current = setTimeout(() => {
       setShowSplash(false);
       setIsTransitioning(false);
       transitionTimeoutRef.current = null;
     }, 500);
+  }, []);
+
+  const handleSocialAuthSuccess = useCallback(() => {
+    storage.setItem('sapph_authenticated', 'true');
+    setIsAuthenticated(true);
+    setShowSplash(false);
+  }, []);
+
+  const handleSignInWithEmail = useCallback(() => {
+    setShowEmailSignIn(true);
   }, []);
 
   // Cleanup timeout on unmount
@@ -99,9 +106,17 @@ function App() {
     });
   }, [currentView]);
 
-  // Show password page if not authenticated
+  // Not authenticated: show splash (two-step) or password page if they chose email
   if (!isAuthenticated) {
-    return <PasswordPage onPasswordCorrect={handlePasswordCorrect} />;
+    if (showEmailSignIn) {
+      return <PasswordPage onPasswordCorrect={handlePasswordCorrect} />;
+    }
+    return (
+      <SplashScreen
+        onSignInWithEmail={handleSignInWithEmail}
+        onSocialAuthSuccess={handleSocialAuthSuccess}
+      />
+    );
   }
 
   return (
@@ -111,7 +126,10 @@ function App() {
           <div 
             className={`splash-transition ${isTransitioning ? 'fade-out' : 'fade-in'}`}
           >
-            <SplashScreen onSignIn={handleSignIn} />
+            <SplashScreen
+              onSignInWithEmail={transitionToApp}
+              onSocialAuthSuccess={handleSocialAuthSuccess}
+            />
           </div>
         )}
         <div 
